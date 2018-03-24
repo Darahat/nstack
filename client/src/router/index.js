@@ -5,7 +5,6 @@ import Login from '@/components/login'
 import index from '@/components/activeView'
 import post from '@/components/post'
 import addpost from '@/components/addPost'
-import blank from '@/components/blank'
 Vue.use(Router)
 
 export default new Router({
@@ -34,11 +33,6 @@ export default new Router({
       path: '/addpost',
       name: 'addpost',
       component: addpost
-    },
-    {
-      path: '/blank',
-      name: 'blank',
-      component: blank
     }
   ]
 })

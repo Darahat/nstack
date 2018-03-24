@@ -88,20 +88,18 @@
 
 </template>
 <script>
-  import panel from '@/components/panel'
-  import footBar from '@/components/footer'
-  import bottomOptions from '@/components/bottomoptions'
-  export default {
-    components: {
-      panel, footBar, bottomOptions
-    }
-
+import panel from '@/components/panel'
+import footBar from '@/components/footer'
+import bottomOptions from '@/components/bottomoptions'
+export default {
+  components: {
+    panel, footBar, bottomOptions
   }
-
+}
 </script>
 
 <style>
- li{
-       list-style: none;
- }
+li{
+      list-style: none;
+}
 </style>

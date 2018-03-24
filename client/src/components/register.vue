@@ -10,16 +10,16 @@
                 <v-layout row wrap>
                   <v-flex xs12 sm9>
                     <p class="title" style="margin-bottom:30px">Nstack</p>
-                    <v-text-field solo prepend-icon="person"  class="t-field" label="Username"></v-text-field>
-                    <v-text-field solo prepend-icon="email" label="Email"  class="t-field"></v-text-field>
-                    <v-text-field solo prepend-icon="lock" label="Password" class="t-field" ></v-text-field>
+                    <v-text-field solo type="text" name="username" prepend-icon="person" placeholder="Username" v-model="username" class="t-field"></v-text-field>
+                    <v-text-field solo type="email" v-model="email" name="email" prepend-icon="email" placeholder="Email"  class="t-field"></v-text-field>
+                    <v-text-field solo type="password" v-model="password" name="password" prepend-icon="lock" placeholder="Password" class="t-field" ></v-text-field>
                     <div class="t-field">
-                      <flex xs12 sm6 style="margin: 10px;">
+                      <v-flex xs12 sm6 style="margin: 10px;">
                         <span style="color:gray;">Forgot password?</span>
-                      </flex>
-                      <flex xs12 sm6>
-                        <v-btn color="blue" class="white--text">Register</v-btn>
-                      </flex>
+                      </v-flex>
+                      <v-flex xs12 sm6>
+                        <v-btn color="blue" class="white--text" @click="register">Register</v-btn>
+                      </v-flex>
                     </div>
                   </v-flex>
                   <span style="color:gray;margin:40px">All ready have a Nstack account?</span>
@@ -37,8 +37,25 @@
 </div>
 </template>
 <script>
+import authenticationService from '@/services/authenticationService'
 export default {
-  name: 'register'
+  data () {
+    return {
+      email: '',
+      username: '',
+      password: ''
+    }
+  },
+  methods:{
+    async register () {
+    const response = (await authenticationService.register({
+      username: this.username,
+      email: this.email,
+      password: this.password
+    })).data
+    console.log(response)
+    }
+  }
 }
 </script>
 <style scoped>

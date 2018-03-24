@@ -76,27 +76,18 @@
   </div>
 </template>
 <script>
-  export default {
-    data () {
-      return {
-        dialog: false,
-        dialog2: false,
-        dialog3: false,
-        notifications: false,
-        sound: true,
-        widgets: false,
-        select: [
-          { text: 'State 1' },
-          { text: 'State 2' },
-          { text: 'State 3' },
-          { text: 'State 4' },
-          { text: 'State 5' },
-          { text: 'State 6' },
-          { text: 'State 7' }
-        ]
-      }
+export default {
+  data () {
+    return {
+      dialog: false,
+      dialog2: false,
+      dialog3: false,
+      notifications: false,
+      sound: true,
+      widgets: false
     }
   }
+}
 </script>
 <style>
 </style>

@@ -72,7 +72,7 @@ export default {
           carbs: 37,
           protein: 4.3,
           iron: '1%'
-        },
+        }
       ]
     }
   },

@@ -18,17 +18,15 @@
 </div>
 </template>
 <script>
-  import linkPost from '@/components/linkpost'
-  export default {
-    components:{
-      linkPost
-    }
+import linkPost from '@/components/linkpost'
+export default {
+  components: {
+    linkPost
   }
+}
 </script>
-
 <style>
 #title{
   padding-left: 15%;
-  
 }
 </style>
