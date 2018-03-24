@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -18,6 +17,34 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+body{
+  background-color:#FFFAF7
+}
+.title{
+  font-family: 'Pacifico', cursive;
+  color:dodgerblue;
+  font-size: 25px;
+  font-weight: bold;
+  padding-top:15px;
+  text-align: left;
+}
+h1{
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size:35px;
+  padding-bottom: 5px;
+}
+h4{
+  margin-bottom: 15px;
+}
+h6{
+  margin-bottom: 25px;
+  color:gray
+}
+.t-field{
+  margin-bottom:10px
 }
 </style>

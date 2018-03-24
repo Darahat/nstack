@@ -8,9 +8,9 @@ app.use(cors())
 app.use(morgan('conbine'))
 app.use(bodyParser.json())
 
-app.get('/status', (req, res) => {
+app.post('/register', (req, res) => {
   res.send({
-    message: 'hello there'
+    message: `Your ${req.body.email} is registered have fun and your password is ${req.body.password}`
   })
 })
 
