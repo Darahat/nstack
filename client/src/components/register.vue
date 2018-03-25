@@ -46,14 +46,14 @@ export default {
       password: ''
     }
   },
-  methods:{
+  methods: {
     async register () {
-    const response = (await authenticationService.register({
-      username: this.username,
-      email: this.email,
-      password: this.password
-    })).data
-    console.log(response)
+      const response = (await authenticationService.register({
+        username: this.username,
+        email: this.email,
+        password: this.password
+      })).data
+      console.log(response)
     }
   }
 }
