@@ -13,6 +13,7 @@
                     <v-text-field solo type="text" name="username" prepend-icon="person" placeholder="Username" v-model="username" class="t-field"></v-text-field>
                     <v-text-field solo type="email" v-model="email" name="email" prepend-icon="email" placeholder="Email"  class="t-field"></v-text-field>
                     <v-text-field solo type="password" v-model="password" name="password" prepend-icon="lock" placeholder="Password" class="t-field" ></v-text-field>
+                    <div class="red--text" v-html="error" />
                     <div class="t-field">
                       <v-flex xs12 sm6 style="margin: 10px;">
                         <span style="color:gray;">Forgot password?</span>
@@ -43,17 +44,21 @@ export default {
     return {
       email: '',
       username: '',
-      password: ''
+      password: '',
+      error: null
     }
   },
   methods: {
     async register () {
-      const response = (await authenticationService.register({
-        username: this.username,
-        email: this.email,
-        password: this.password
-      })).data
-      console.log(response)
+      try {
+        await authenticationService.register({
+          username: this.username,
+          email: this.email,
+          password: this.password
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 }
