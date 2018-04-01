@@ -1,5 +1,5 @@
 <template>
-    <div style="border-bottom:1px solid gray">
+    <div id="link" style="border-bottom:1px solid gray">
     <v-container fluid>
       <v-layout>
         <v-flex xs12 sm5> Community> Active View</v-flex>
@@ -30,20 +30,26 @@
             <v-container class="py-3 my-3 mx-5 px-5">
             <v-layout row wrap>
               <v-flex xs12>
+                <v-flex xs12>
+              </v-flex>
                 <v-text-field
                   class="mb-3"
                   solo
+                  required
+                  :rules = "[required]"
                   label="Post Title"
-                  :counter="25"
+                  v-model="post.title"
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
                 class="mb-3"
                   solo
+                  required
+                  :rules = "[required]"
                   textarea
                   label="Post Description"
-                  :counter="50"
+                  v-model="post.description"
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
@@ -51,18 +57,23 @@
                 class="mb-3"
                   dark
                   solo
+                  required
+                  :rules = "[required]"
                   label="Post Image URL"
-                  :counter="50"
+                  v-model="post.imgurl"
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
                 class="mb-3"
                   solo
+                  required
+                  :rules = "[required]"
                   label="Post Tags"
-                  :counter="50"
+                  v-model="post.tags"
                 ></v-text-field>
-                <v-btn color="blue" class="white--text">Post</v-btn>
+                <span class="red--text" v-html="error"></span>
+                <v-btn color="blue" @click="createPost" class="white--text">Post</v-btn>
               </v-flex>
             </v-layout>
           </v-container>
@@ -76,18 +87,47 @@
   </div>
 </template>
 <script>
+import postService from '@/services/postService'
 export default {
+  props: [
+    'user'
+  ],
   data () {
     return {
+      post: {
+      title: null,
+      description: null,
+      imgurl: null,
+      tags: null,
+      },
       dialog: false,
-      dialog2: false,
-      dialog3: false,
-      notifications: false,
-      sound: true,
-      widgets: false
+      error: null,
+      required: (value) => !!value || 'Required.',
+    }
+  },
+  methods: {
+    async createPost () {
+      const areAllFieldsFilledIn = Object
+      .keys(this.post)
+      .every(key => !!this.post[key])
+      if (!areAllFieldsFilledIn) {
+        this.error = "Please fill all the required fields. "
+        return
+        }
+      try {
+        await postService.post(this.post)
+        this.$router.push({
+          name: 'index'
+        })
+      } catch (error) {
+        this.error = error.response.data.error
+      }
     }
   }
 }
 </script>
 <style>
+#link{
+  margin-top: 80px;
+}
 </style>

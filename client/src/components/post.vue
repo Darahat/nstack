@@ -1,17 +1,15 @@
 <template>
 <div>
-  <panel/>
   <v-layout>
     <v-flex xs12 sm12 offset-sm0>
       <v-card flat>
-        <v-card-media class="white--text" height="400px" src="https://images.pexels.com/photos/209640/pexels-photo-209640.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940">
+        <v-card-media class="white--text" height="400px" :src="post.imgurl">
           <v-container fill-height fluid>
             <v-layout fill-height>
               <v-flex xs12 align-end flexbox mt-5 pt-5>
-                <span class="white--text">23 March 2018</span>
+                <span class="white--text">{{post.createdAt}}</span>
                 <br>
-                <span class="headline"> If you can't do great things,
-                  <br/> do small things in a great way</span>
+                <span class="headline">{{post.title}}</span>
               </v-flex>
             </v-layout>
           </v-container>
@@ -41,23 +39,7 @@
             <v-flex xs6 sm5 justify offset-sm2 mt-3 pt-3>
               <h1>Demo Test</h1>
               <p style="line-height:30px; font-size:12px;text-align:justify; word-space:1px">
-                What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
-                it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                including versions of Lorem Ipsum.What is Lorem Ipsum? Lorem Ipsum is simply dummy text of the printing and
-                typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when
-                an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not
-                only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was
-                popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
-                with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.What is Lorem Ipsum?
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-                to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-                typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset
-                sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-                including versions of Lorem Ipsum.
+                {{post.description}}
               </p>
               <div style="text-align:left">
                 <v-avatar
@@ -91,9 +73,20 @@
 import panel from '@/components/panel'
 import footBar from '@/components/footer'
 import bottomOptions from '@/components/bottomoptions'
+import postService from '@/services/postService'
 export default {
+  data () {
+    return {
+      post: {}
+    }
+  },
   components: {
     panel, footBar, bottomOptions
+  },
+  async mounted () {
+    const postId = this.$store.state.route.params.postId
+    console.log(postId)
+    this.post = (await postService.show(postId)).data
   }
 }
 </script>

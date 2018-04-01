@@ -51,17 +51,21 @@ export default {
   methods: {
     async register () {
       try {
-        await authenticationService.register({
-          username: this.username,
+        const response = await authenticationService.register({
           email: this.email,
-          password: this.password
+          password: this.password,
+          username: this.username
         })
+        this.$router.push('/login')
+        this.$store.dispatch('setToken', response.data.token)
+        this.$store.dispatch('setUser', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }
     }
   }
 }
+
 </script>
 <style scoped>
 </style>

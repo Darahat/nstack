@@ -4,7 +4,8 @@ import Register from '@/components/register'
 import Login from '@/components/login'
 import index from '@/components/activeView'
 import post from '@/components/post'
-import addpost from '@/components/addPost'
+import user from '@/components/user'
+// import addpost from '@/components/addPost'
 Vue.use(Router)
 
 export default new Router({
@@ -20,19 +21,24 @@ export default new Router({
       component: Login
     },
     {
+      path: '/userIndex',
+      name: 'user',
+      component: user
+    },
+    {
       path: '/index',
       name: 'index',
       component: index
     },
     {
-      path: '/post',
+      path: '/index/:postId',
       name: 'post',
       component: post
-    },
-    {
-      path: '/addpost',
-      name: 'addpost',
-      component: addpost
     }
+    // {
+    //   path: '/addpost',
+    //   name: 'addpost',
+    //   component: addpost
+    // }
   ]
 })

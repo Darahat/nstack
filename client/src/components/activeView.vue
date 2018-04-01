@@ -1,6 +1,5 @@
 <template>
 <div>
-  <panel/>
   <!-- <link-post/> -->
   <v-container>
         <table-data/>
@@ -14,14 +13,13 @@
 </div>
 </template>
 <script>
-import panel from '@/components/panel'
 import tableData from '@/components/questionTable'
 // import linkPost from '@/components/linkpost'
 import footerPanel from '@/components/footer'
 import bottomOptions from '@/components/bottomoptions'
 export default {
   components: {
-    panel, tableData, footerPanel, bottomOptions
+    tableData, footerPanel, bottomOptions
   }
 }
 

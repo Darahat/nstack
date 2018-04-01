@@ -10,6 +10,8 @@ module.exports = {
       storage: './nstack.sqlite'
 
     }
-
+  },
+  authentication: {
+    jwtSecret: process.env.JWT_SECRET || 'secret'
   }
 }

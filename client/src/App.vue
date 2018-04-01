@@ -1,11 +1,17 @@
 <template>
   <div id="app">
+    <panel></panel>
     <router-view/>
   </div>
 </template>
 
 <script>
+import panel from '@/components/panel'
+// import blank from '@/components/blank'
 export default {
+  components: {
+    panel
+  },
   name: 'App'
 }
 </script>
