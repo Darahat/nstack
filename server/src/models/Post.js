@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.TEXT,
     imgurl: DataTypes.STRING,
     tags: DataTypes.STRING,
-    userId: DataTypes.STRING
+    userId: DataTypes.INTEGER
   })
   return Post
 }

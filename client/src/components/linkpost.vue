@@ -72,6 +72,15 @@
                   label="Post Tags"
                   v-model="post.tags"
                 ></v-text-field>
+
+                <!-- <v-text-field
+                  :v-bind="user.username"
+                  type="hidden"
+                  v-
+                  v-model="post.userId"
+                >
+                </v-text-field> -->
+
                 <span class="red--text" v-html="error"></span>
                 <v-btn color="blue" @click="createPost" class="white--text">Post</v-btn>
               </v-flex>
@@ -95,25 +104,30 @@ export default {
   data () {
     return {
       post: {
-      title: null,
-      description: null,
-      imgurl: null,
-      tags: null,
+        title: null,
+        description: null,
+        imgurl: null,
+        tags: null,
+        userId: null
       },
       dialog: false,
       error: null,
-      required: (value) => !!value || 'Required.',
+      required: (value) => !!value || 'Required.'
     }
   },
   methods: {
     async createPost () {
+      console.log(this.post.userId)
+      console.log(this.user.id)
+      this.post.userId = this.user.id
+      console.log(this.post.userId)
       const areAllFieldsFilledIn = Object
-      .keys(this.post)
-      .every(key => !!this.post[key])
+        .keys(this.post)
+        .every(key => !!this.post[key])
       if (!areAllFieldsFilledIn) {
-        this.error = "Please fill all the required fields. "
+        this.error = 'Please fill all the required fields. '
         return
-        }
+      }
       try {
         await postService.post(this.post)
         this.$router.push({

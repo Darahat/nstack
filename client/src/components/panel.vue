@@ -80,9 +80,9 @@ export default {
   },
   async mounted () {
     const userId = this.$store.state.user.id
-    console.log(userId)
+    // console.log(userId)
     this.user = (await userService.show(userId)).data
-    console.log(this.user)
+    // console.log(this.user)
   },
   data: () => ({
     drawer: false,

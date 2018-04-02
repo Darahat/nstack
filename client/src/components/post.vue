@@ -41,18 +41,19 @@
               <p style="line-height:30px; font-size:12px;text-align:justify; word-space:1px">
                 {{post.description}}
               </p>
-              <div style="text-align:left">
+              <div style="text-align:right" @click="navigateTo({
+                name: 'userProfile',
+                params: {
+                  userId: post.userId
+                }})">
+                <span  class="pb-2 body-2">{{user.username}}</span>
                 <v-avatar
-              size="36px"
-              slot="activator"
+                class="green"
+                size="20px"
             >
-              <img
-                src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-                alt=""
-              >
+              <i dark class="fa fa-user"></i>
               </v-avatar>
-                <h3 class="pb-2">Jorge Washington</h3>
-                <h5 class="grey--text pb-3">5 February 1776</h5>
+                <p class="grey--text caption pb-3">Senior Executive & <br>Human Resource Manager(HRM) <br>Lilo corp.</p>
               </div>
             </v-flex>
           </v-layout>
@@ -74,10 +75,17 @@ import panel from '@/components/panel'
 import footBar from '@/components/footer'
 import bottomOptions from '@/components/bottomoptions'
 import postService from '@/services/postService'
+import userService from '@/services/userService'
 export default {
   data () {
     return {
-      post: {}
+      post: {},
+      user: {}
+    }
+  },
+  methods: {
+    navigateTo (route) {
+      this.$router.push(route)
     }
   },
   components: {
@@ -85,8 +93,9 @@ export default {
   },
   async mounted () {
     const postId = this.$store.state.route.params.postId
-    console.log(postId)
+    const userId = this.$store.state.route.params.userId
     this.post = (await postService.show(postId)).data
+    this.user = (await userService.show(userId)).data
   }
 }
 </script>

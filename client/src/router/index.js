@@ -4,7 +4,8 @@ import Register from '@/components/register'
 import Login from '@/components/login'
 import index from '@/components/activeView'
 import post from '@/components/post'
-import user from '@/components/user'
+import user from '@/components/userProfile'
+
 // import addpost from '@/components/addPost'
 Vue.use(Router)
 
@@ -21,7 +22,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/userIndex',
+      path: '/user/:userId',
       name: 'user',
       component: user
     },
@@ -31,7 +32,7 @@ export default new Router({
       component: index
     },
     {
-      path: '/index/:postId',
+      path: '/index/:userId/:postId',
       name: 'post',
       component: post
     }

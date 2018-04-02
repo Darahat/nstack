@@ -8,7 +8,8 @@
             <v-card-media class="white--text" height="200px" :src="post.imgurl" @click="navigateTo({
                 name: 'post',
                 params: {
-                  postId: post.id
+                  postId: post.id,
+                  userId: post.userId
                 }})">
               <v-container fill-height fluid>
                 <v-layout fill-height>
@@ -58,17 +59,18 @@ export default {
     }
   },
   components: {
-   blank
+    blank
   },
   async mounted () {
     this.posts = (await postService.index()).data
   },
-  methods:{
-    navigateTo(route){
-     this.$router.push(route)
+  methods: {
+    navigateTo (route) {
+      this.$router.push(route)
     }
   }
 }
+
 </script>
 <style>
 </style>
