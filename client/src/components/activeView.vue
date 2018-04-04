@@ -1,8 +1,10 @@
 <template>
 <div>
   <!-- <link-post/> -->
-  <v-container>
+      <v-container>
+      <v-flex xs12 sm12>
         <table-data/>
+      </v-flex>
 </v-container>
 <div>
   <bottom-options/>

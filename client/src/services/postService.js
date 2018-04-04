@@ -8,5 +8,8 @@ export default{
   },
   show (postId) {
     return api().get(`index/${postId}`)
+  },
+  showUserId (userId) {
+    return api().get(`index/${userId}`)
   }
 }

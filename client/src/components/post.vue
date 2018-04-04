@@ -42,7 +42,7 @@
                 {{post.description}}
               </p>
               <div style="text-align:right" @click="navigateTo({
-                name: 'userProfile',
+                name: 'user',
                 params: {
                   userId: post.userId
                 }})">

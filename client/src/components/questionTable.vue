@@ -1,10 +1,8 @@
 <template>
-
   <v-container grid-list-md offset-sm3 mt-5>
     <v-layout row wrap>
       <v-flex xs12 sm4 v-for="post in posts" :key="post.id">
-        <blank>
-          <v-card>
+          <v-card >
             <v-card-media class="white--text" height="200px" :src="post.imgurl" @click="navigateTo({
                 name: 'post',
                 params: {
@@ -42,7 +40,6 @@
               </v-btn>
             </v-card-actions>
           </v-card>
-        </blank>
       </v-flex>
     </v-layout>
   </v-container>

@@ -9,6 +9,8 @@ module.exports = (app) => {
   app.post('/index', PostController.post)
   app.get('/index', PostController.index)
   app.get('/index/:postId', PostController.show)
+  app.get('/index/:userId', PostController.getPostByUserId)
   app.get('/userIndex', userController.index)
   app.get('/userIndex/:userId', userController.show)
+  app.get('/userIndex/:userId', PostController.getPostByUserId)
 }
