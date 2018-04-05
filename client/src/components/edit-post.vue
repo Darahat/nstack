@@ -1,26 +1,26 @@
 <template>
-    <div id="link" style="border-bottom:1px solid gray">
+    <div>
+      <v-btn v-if="$store.state.isUserLoggedIn" icon @click.stop="
+                dialog = true">
+                <v-icon class="fa fa-edit"></v-icon>
+              </v-btn>
+
     <v-container fluid>
       <v-layout>
-        <v-flex xs12 sm5> Community> Active View</v-flex>
-        <v-spacer></v-spacer>
-        <v-flex xs12 sm5>
-          <v-btn color="blue" dark @click.stop="dialog = true" class="white--text">New Post</v-btn>
-        </v-flex>
+          <!-- <v-btn color="blue" dark class="white--text">Update Post</v-btn> -->
         <v-dialog
         v-model="dialog"
         fullscreen
         transition="dialog-bottom-transition"
         :overlay="false"
         scrollable
-        id="dialog"
       >
         <v-card color="white" tile>
           <v-toolbar card dark class="white--text" color="blue darken-1">
             <v-btn icon @click.native="dialog = false" dark>
               <v-icon>close</v-icon>
             </v-btn>
-            <v-toolbar-title>New Post</v-toolbar-title>
+            <v-toolbar-title>Update Post</v-toolbar-title>
             <v-spacer></v-spacer>
             <!-- <v-toolbar-items>
               <v-btn dark flat @click.native="dialog = false">Save</v-btn>
@@ -82,7 +82,7 @@
                 </v-text-field> -->
 
                 <span class="red--text" v-html="error"></span>
-                <v-btn color="blue" @click="createPost" class="white--text">Post</v-btn>
+                <v-btn color="blue" @click="save" class="white--text">Save</v-btn>
               </v-flex>
             </v-layout>
           </v-container>
@@ -116,11 +116,7 @@ export default {
     }
   },
   methods: {
-    async createPost () {
-      console.log(this.post.userId)
-      console.log(this.user.id)
-      this.post.userId = this.user.id
-      console.log(this.post.userId)
+    async save () {
       const areAllFieldsFilledIn = Object
         .keys(this.post)
         .every(key => !!this.post[key])
@@ -128,20 +124,30 @@ export default {
         this.error = 'Please fill all the required fields. '
         return
       }
+      const postId = this.$store.state.route.params.postId
       try {
-        await postService.post(this.post)
+        await postService.put(this.post)
         this.$router.push({
-          name: 'index'
+          name: 'post',
+          params: {
+            postId: postId
+          }
         })
-      } catch (error) {
-        this.error = error.response.data.error
+      } catch (err) {
+        console.log(err)
       }
+    }
+  },
+  async mounted () {
+    try {
+      const postId = this.$store.state.route.params.postId
+      this.post = (await postService.show(postId)).data
+    } catch (err) {
+      console.log(err)
     }
   }
 }
+
 </script>
-<style >
-#link{
-  margin-top: 80px;
-}
+<style>
 </style>

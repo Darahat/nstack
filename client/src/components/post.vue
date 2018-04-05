@@ -25,27 +25,40 @@
           </v-card-title> -->
             <v-flex xs6 sm1 justify offset-sm1 mt-3 pt-3>
               <ul>
-                <li>
-                  <i large class="fa fa-facebook-square" style="font-size:30px;color:#3b5998;"></i>
+                <!-- <li>
+                  <v-icon large class="fa fa-facebook-square" style="font-size:30px;color:#3b5998;"></v-icon>
                 </li>
                 <li>
-                  <i large class="fa fa-linkedin-square" style="font-size:30px;color:#0e76a8;"></i>
+                  <v-icon large class="fa fa-linkedin-square" style="font-size:30px;color:#0e76a8;"></v-icon>
                 </li>
                 <li>
-                  <i large class="fa fa-twitter-square" style="font-size:30px;color:#00aced;"></i>
+                  <v-icon large class="fa fa-twitter-square" style="font-size:30px;color:#00aced;"></v-icon>
+                </li> -->
+              <li>
+              <v-btn icon>
+                <v-icon class="fa fa-bookmark"></v-icon>
+              </v-btn>
+                </li>
+                  <li>
+                  <v-badge color="grey" overlap left  fab-transition>
+                <span slot="badge">0</span>
+                <v-btn icon>
+                  <v-icon class="fa fa-heart"></v-icon>
+                </v-btn>
+              </v-badge>
+              </li>
+                <li>
+                  <edit-post/>
                 </li>
               </ul>
             </v-flex>
             <v-flex xs6 sm5 justify offset-sm2 mt-3 pt-3>
-              <h1>Demo Test</h1>
+              <span class="headline">Demo Test</span>
               <p style="line-height:30px; font-size:12px;text-align:justify; word-space:1px">
                 {{post.description}}
               </p>
-              <div style="text-align:right" @click="navigateTo({
-                name: 'user',
-                params: {
-                  userId: post.userId
-                }})">
+              <v-spacer></v-spacer>
+              <div style="text-align:right">
                 <span  class="pb-2 body-2">{{user.username}}</span>
                 <v-avatar
                 class="green"
@@ -58,7 +71,7 @@
             </v-flex>
           </v-layout>
         </v-container>
-        <!-- <v-card-actions>
+        <!-- <v-card->
           <v-btn flat color="orange">Share</v-btn>
           <v-btn flat color="orange">Explore</v-btn>
         </v-card-actions> -->
@@ -76,6 +89,7 @@ import footBar from '@/components/footer'
 import bottomOptions from '@/components/bottomoptions'
 import postService from '@/services/postService'
 import userService from '@/services/userService'
+import editPost from '@/components/edit-post'
 export default {
   data () {
     return {
@@ -89,7 +103,7 @@ export default {
     }
   },
   components: {
-    panel, footBar, bottomOptions
+    panel, footBar, bottomOptions, editPost
   },
   async mounted () {
     const postId = this.$store.state.route.params.postId
@@ -105,3 +119,8 @@ li{
       list-style: none;
 }
 </style>
+//  @click="navigateTo({
+//                 name: 'user',
+//                 params: {
+//                   userId: post.userId
+//                 }})"

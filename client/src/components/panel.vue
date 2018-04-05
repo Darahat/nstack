@@ -32,12 +32,12 @@
     </v-navigation-drawer>
     <v-toolbar app fixed clipped-left dense>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title @click="navigateTo('/index')"><p class="title">Nstack</p></v-toolbar-title>
+      <v-toolbar-title><router-link :to="('/index')" class="title" tag="p">Nstack</router-link></v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat v-if="$store.state.isUserLoggedIn" @click="logout">Log out</v-btn>
-      <v-btn flat v-if="!$store.state.isUserLoggedIn" @click="navigateTo('/login')">Login</v-btn>
-      <v-btn flat v-if="!$store.state.isUserLoggedIn" @click="navigateTo('/register')">Sign up</v-btn>
+      <router-link class="flat" tag="v-btn" v-if="!$store.state.isUserLoggedIn" :to="{name: 'login'}">Login</router-link>
+      <router-link flat tag="v-btn" v-if="!$store.state.isUserLoggedIn" :to="{name:'register'}">Sign up</router-link>
     </v-toolbar-items>
     </v-toolbar>
     <link-post :user="user" v-if="$store.state.isUserLoggedIn"></link-post>
@@ -79,10 +79,15 @@ export default {
     linkPost
   },
   async mounted () {
+    try{
     const userId = this.$store.state.user.id
     // console.log(userId)
     this.user = (await userService.show(userId)).data
     // console.log(this.user)
+    }
+    catch(err){
+      console.log('No User Logged in')
+    }
   },
   data: () => ({
     drawer: false,

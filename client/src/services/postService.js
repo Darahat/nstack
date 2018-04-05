@@ -1,10 +1,17 @@
 import api from '@/services/api'
 export default{
-  post (credentials) {
-    return api().post('index', credentials)
+  post (post) {
+    return api().post('index', post)
   },
-  index () {
-    return api().get('index')
+  put (post) {
+    return api().put(`index/${post.id}`, post)
+  },
+  index (search) {
+    return api().get('index', {
+      params: {
+        search: search
+      }
+    })
   },
   show (postId) {
     return api().get(`index/${postId}`)

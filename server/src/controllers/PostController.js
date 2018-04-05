@@ -11,11 +11,43 @@ module.exports = {
       })
     }
   },
+  async put (req, res) {
+    try {
+      await Post.update(req.body, {
+        where: {
+          id: req.params.postId
+        }
+      })
+      res.send(req.body)
+    } catch (err) {
+      console.log('hey errors', err)
+      res.status(400).send({
+        error: 'Error has occured trying to create new post'
+      })
+    }
+  },
   async index (req, res) {
     try {
-      const post = await Post.findAll({
-        limit: 10
-      })
+      let post = null
+      const search = req.query.search
+      if (search) {
+        post = await Post.findAll({
+          where: {
+            $or: [
+              'title', 'description', 'tags'
+            ].map(key => ({
+              [key]: {
+                $like: `%${search}%`
+              }
+            })
+            )
+          }
+        })
+      } else {
+        post = await Post.findAll({
+          limit: 10
+        })
+      }
       res.send(post)
     } catch (err) {
       console.log('hey errors', err)
@@ -48,14 +80,19 @@ module.exports = {
   },
   async getPostByUserId (req, res) {
     try {
-      // const {userId} = req.body
-      const post = await Post.find(req.params.userId
-        // {
-        //   where: {
-        //     userId: userId
-        //   }
-        // }
-      )
+      let post = null
+      const userId = req.query.userId
+      if (userId) {
+        post = await Post.findAll({
+          where: {
+            userId: userId
+          }
+        })
+      } else {
+        post = await Post.findAll({
+          limit: 10
+        })
+      }
       res.send(post)
     } catch (err) {
       console.log('hey errors', err)
@@ -64,19 +101,4 @@ module.exports = {
       })
     }
   }
-  // async getPostByUserId (req, res) {
-  //   try {
-  //     const {userId} = req.body
-  //     const post = await Post.findById(req.params.userId)
-  //     if (!post) {
-  //       return res.status(403).send({
-  //         error: 'No User found'
-  //       })
-  //     }
-  //   } catch (error) {
-  //     res.status(403).send({
-  //       error: 'An error has occured when trying to login'
-  //     })
-  //   }
-  // }
 }

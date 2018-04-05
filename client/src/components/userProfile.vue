@@ -92,7 +92,7 @@ export default {
   components: {
     questionTable
   },
-  navigateTo(route){
+  navigateTo (route) {
     this.$router.push(route)
   },
   async mounted () {
@@ -109,6 +109,7 @@ export default {
   //   'posts'
   // ]
 }
+
 </script>
 <style >
   .media

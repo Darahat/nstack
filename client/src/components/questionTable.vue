@@ -1,6 +1,8 @@
 <template>
   <v-container grid-list-md offset-sm3 mt-5>
+    <search/>
     <v-layout row wrap>
+
       <v-flex xs12 sm4 v-for="post in posts" :key="post.id">
           <v-card >
             <v-card-media class="white--text" height="200px" :src="post.imgurl" @click="navigateTo({
@@ -9,17 +11,19 @@
                   postId: post.id,
                   userId: post.userId
                 }})">
-              <v-container fill-height fluid>
-                <v-layout fill-height>
-                  <v-flex xs12 align-end flexbox>
-                    <span class="headline white--text">{{post.title}}</span>
-                  </v-flex>
-                </v-layout>
-              </v-container>
+            >
             </v-card-media>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-badge color="pink" left>
+              <v-container fill-height fluid style="text-align:left">
+                <v-layout fill-height>
+                  <v-flex xs12 align-end flexbox>
+                    <span class="subheading grey--text">{{post.title}}</span>
+                    <!-- <p class="black--text">{{user.username}}</p> -->
+                  </v-flex>
+                </v-layout>
+              </v-container>
+              <!-- <v-badge color="pink" left>
                 <span slot="badge">0</span>
                 <v-btn icon small right>
                   <v-icon>favorite</v-icon>
@@ -27,17 +31,8 @@
               </v-badge>
               <v-btn icon small right>
                 <v-icon>bookmark</v-icon>
-              </v-btn>
-                <v-btn icon small>
-                  <v-icon left>share</v-icon>
-                </v-btn>
-              <v-btn icon small @click="navigateTo({
-                name: 'post',
-                params: {
-                  postId: post.id
-                }})">
-                <v-icon left>edit</v-icon>
-              </v-btn>
+              </v-btn> -->
+
             </v-card-actions>
           </v-card>
       </v-flex>
@@ -48,24 +43,43 @@
 
 <script>
 import postService from '@/services/postService'
+import userService from '@/services/userService'
 import blank from '@/components/blank'
+import search from '@/components/search'
 export default {
   data () {
     return {
-      posts: null
+      posts: null,
+      //  post: {},
+      // user: {}
     }
   },
+  //   async mounted () {
+  //   const postId = this.$store.state.route.params.postId
+  //   const userId = this.$store.state.route.params.userId
+  //   this.post = (await postService.show(postId)).data
+  //   this.user = (await userService.show(userId)).data
+  // },
   components: {
-    blank
+    blank,
+    search
   },
-  async mounted () {
-    this.posts = (await postService.index()).data
+  // async mounted () {
+  //   this.posts = (await postService.index()).data
+  // },
+  watch: {
+    '$route.query.search': {
+      immediate: true,
+      async handler (value) {
+        this.posts = (await postService.index(value)).data
+      }
+    }
   },
   methods: {
     navigateTo (route) {
       this.$router.push(route)
     }
-  }
+  },
 }
 
 </script>
