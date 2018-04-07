@@ -127,6 +127,7 @@ export default {
       const postId = this.$store.state.route.params.postId
       try {
         await postService.put(this.post)
+        this.dialog = false
         this.$router.push({
           name: 'post',
           params: {

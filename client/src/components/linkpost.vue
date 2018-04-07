@@ -130,6 +130,7 @@ export default {
       }
       try {
         await postService.post(this.post)
+        this.dialog = false
         this.$router.push({
           name: 'index'
         })

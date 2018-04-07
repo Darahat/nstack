@@ -1,6 +1,7 @@
 const authenticationController = require('./controllers/authenticationController')
 const PostController = require('./controllers/PostController')
 const userController = require('./controllers/UserController')
+const bookmarksController = require('./controllers/bookmarksController')
 const authenticationControllerPolicy = require('./policies/authenticationControllerPolicy')
 // const getAllPostController = require('./controllers/getAllPostController')
 module.exports = (app) => {
@@ -10,8 +11,8 @@ module.exports = (app) => {
   app.put('/index/:postId', PostController.put)
   app.get('/index', PostController.index)
   app.get('/index/:postId', PostController.show)
-  // app.get('/index/:userId', PostController.getPostByUserId)
   app.get('/userIndex', userController.index)
   app.get('/userIndex/:userId', userController.show)
   app.get('/userIndex/:userId', PostController.getPostByUserId)
+  app.get('/bookmarks', bookmarksController.index)
 }
