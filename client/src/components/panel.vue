@@ -79,13 +79,12 @@ export default {
     linkPost
   },
   async mounted () {
-    try{
-    const userId = this.$store.state.user.id
-    // console.log(userId)
-    this.user = (await userService.show(userId)).data
-    // console.log(this.user)
-    }
-    catch(err){
+    try {
+      const userId = this.$store.state.user.id
+      // console.log(userId)
+      this.user = (await userService.show(userId)).data
+      // console.log(this.user)
+    } catch (err) {
       console.log('No User Logged in')
     }
   },
@@ -96,8 +95,8 @@ export default {
       title: 'Home',
       icon: 'dashboard',
       name: 'index'
-    }
-    ]
+    }]
   })
 }
+
 </script>

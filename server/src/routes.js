@@ -15,4 +15,6 @@ module.exports = (app) => {
   app.get('/userIndex/:userId', userController.show)
   app.get('/userIndex/:userId', PostController.getPostByUserId)
   app.get('/bookmarks', bookmarksController.index)
+  app.post('/bookmarks', bookmarksController.post)
+  app.delete('/bookmarks/:bookmarkId', bookmarksController.delete)
 }

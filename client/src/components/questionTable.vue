@@ -43,30 +43,21 @@
 
 <script>
 import postService from '@/services/postService'
-import userService from '@/services/userService'
+// import userService from '@/services/userService'
 import blank from '@/components/blank'
 import search from '@/components/search'
 export default {
   data () {
     return {
-      posts: null,
+      posts: null
       //  post: {},
       // user: {}
     }
   },
-  //   async mounted () {
-  //   const postId = this.$store.state.route.params.postId
-  //   const userId = this.$store.state.route.params.userId
-  //   this.post = (await postService.show(postId)).data
-  //   this.user = (await userService.show(userId)).data
-  // },
   components: {
     blank,
     search
   },
-  // async mounted () {
-  //   this.posts = (await postService.index()).data
-  // },
   watch: {
     '$route.query.search': {
       immediate: true,
@@ -79,9 +70,8 @@ export default {
     navigateTo (route) {
       this.$router.push(route)
     }
-  },
+  }
 }
-
 </script>
 <style>
 </style>

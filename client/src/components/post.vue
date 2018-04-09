@@ -16,34 +16,24 @@
         </v-card-media>
         <v-container fill-height fluid>
           <v-layout fill-height>
-            <!-- <v-card-title>
-            <div>
-              <h2>Whitehaven Beach</h2>
-              <br>
-              <span>Whitsunday Island, Whitsunday Islands</span>
-            </div>
-          </v-card-title> -->
             <v-flex xs6 sm1 justify offset-sm1 mt-3 pt-3>
               <ul>
-                <!-- <li>
-                  <v-icon large class="fa fa-facebook-square" style="font-size:30px;color:#3b5998;"></v-icon>
-                </li>
-                <li>
-                  <v-icon large class="fa fa-linkedin-square" style="font-size:30px;color:#0e76a8;"></v-icon>
-                </li>
-                <li>
-                  <v-icon large class="fa fa-twitter-square" style="font-size:30px;color:#00aced;"></v-icon>
-                </li> -->
               <li>
-              <v-btn icon>
-                <v-icon class="fa fa-bookmark"></v-icon>
+              <v-btn icon @click="setAsBookmark" v-if="isUserLoggedIn && !bookmark">
+                <v-icon>bookmark_border</v-icon>
+              </v-btn>
+              <v-btn icon @click="setAsUnbookmark" v-if="isUserLoggedIn && bookmark">
+                <v-icon>bookmark</v-icon>
               </v-btn>
                 </li>
                   <li>
-                  <v-badge color="grey" overlap left  fab-transition>
+                  <v-badge color="grey" overlap left  fab-transition v-if="$store.state.isUserLoggedIn ">
                 <span slot="badge">0</span>
-                <v-btn icon>
-                  <v-icon class="fa fa-heart"></v-icon>
+                <v-btn icon v-if="isUserLoggedIn && !isFavorite">
+                  <v-icon>favorite</v-icon>
+                </v-btn>
+                <v-btn icon v-if="isUserLoggedIn && isFavorite">
+                  <v-icon>favorite_border</v-icon>
                 </v-btn>
               </v-badge>
               </li>
@@ -90,28 +80,88 @@ import bottomOptions from '@/components/bottomoptions'
 import postService from '@/services/postService'
 import userService from '@/services/userService'
 import editPost from '@/components/edit-post'
+import bookmarkService from '@/services/bookmarkService'
+import {
+  mapState
+} from 'vuex'
 export default {
   data () {
     return {
       post: {},
-      user: {}
+      user: {},
+      bookmark: null,
+      isFavorite: true
+
     }
   },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn'
+    ])
+  },
   methods: {
-    navigateTo (route) {
-      this.$router.push(route)
+    async setAsBookmark () {
+      try {
+        console.log(this.post.id)
+        console.log(this.$store.state.user.id)
+        this.bookmark = (await bookmarkService.post({
+          postId: this.post.id,
+          userId: this.$store.state.user.id
+        })).data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async setAsUnbookmark () {
+      try {
+        console.log(this.bookmark.Id)
+        await bookmarkService.delete(this.bookmark.id)
+        this.bookmark = null
+      } catch (err) {
+        console.log(err)
+      }
     }
   },
   components: {
-    panel, footBar, bottomOptions, editPost
+    panel,
+    footBar,
+    bottomOptions,
+    editPost
+  },
+  watch: {
+    async post(){
+ if (!this.isUserLoggedIn) {
+      return
+    }
+    try {
+      // const postId = this.$store.state.route.params.postId
+      // const userId = this.$store.state.route.params.userId
+      this.bookmark = (await bookmarkService.index({
+        postId: this.post.id,
+        userId: this.$store.state.user.id
+      })).data
+      // console.log(this.post.id)
+      // console.log(this.$store.state.user.id)
+      // console.log('bookmark', this.bookmark)
+    } catch (err) {
+      console.log(err)
+    }
+  }
   },
   async mounted () {
-    const postId = this.$store.state.route.params.postId
-    const userId = this.$store.state.route.params.userId
-    this.post = (await postService.show(postId)).data
-    this.user = (await userService.show(userId)).data
+    try {
+      const postId = this.$store.state.route.params.postId
+      const userId = this.$store.state.route.params.userId
+      // console.log(this.$store.state.route.params.postId)
+      // console.log(this.$store.state.user.id)
+      this.post = (await postService.show(postId)).data
+      this.user = (await userService.show(userId)).data
+    } catch (err) {
+      console.log(err)
+    }
   }
 }
+
 </script>
 
 <style>

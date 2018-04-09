@@ -2,7 +2,7 @@
     <div>
       <v-btn v-if="$store.state.isUserLoggedIn" icon @click.stop="
                 dialog = true">
-                <v-icon class="fa fa-edit"></v-icon>
+                <v-icon>mode_edit</v-icon>
               </v-btn>
 
     <v-container fluid>
