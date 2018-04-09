@@ -1,14 +1,21 @@
-const {Bookmark} = require('../models')
+const {Bookmark, SavedPost} = require('../models')
+const _ = require('lodash')
+
 module.exports = {
   async index (req, res) {
     try {
       const {userId, postId} = req.query
-      const bookmark = await Bookmark.findOne({
-        where: {
-          PostId: postId,
-          UserId: userId
-        }
+      console.log('req.query')
+      console.log(req.query)
+      const bookmarks = await SavedPost.findAll()
+      console.log('alskdfjlaskjdf\n\n\n\n\n\n')
+      console.log(bookmarks)
+
+      const bookmark = _.find(bookmarks, {
+        UserId: userId,
+        PostId: postId
       })
+      console.log(bookmark)
       res.send(bookmark)
     } catch (err) {
       console.log('indexs errors', err)
@@ -20,7 +27,7 @@ module.exports = {
   async  delete (req, res) {
     try {
       const {bookmarkId} = req.params
-      const bookmark = await Bookmark.findById(bookmarkId)
+      const bookmark = await SavedPost.findById(bookmarkId)
       console.log(bookmarkId)
       await bookmark.destroy()
       res.send(bookmark)
@@ -33,24 +40,9 @@ module.exports = {
   },
   async post (req, res) {
     try {
-      // const userId = req.user.id
-      const {userId, postId} = req.body
-
-      const bookmark = await Bookmark.findOne({
-        where: {
-          PostId: postId,
-          UserId: userId
-        }
-      })
-      if (bookmark) {
-        return res.status(400).send({
-          error: 'Already have this set of Bookmark'
-        })
-      }
-      // const bookmark = req.body
-      const newBookmark = await Bookmark.create({
-        PostId: postId,
-        UserId: userId
+      const newBookmark = await SavedPost.create({
+        UserId: req.body.userId,
+        PostId: req.body.postId
       })
       res.send(newBookmark)
     } catch (err) {
