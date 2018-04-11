@@ -18,5 +18,12 @@ export default{
   },
   showUserId (userId) {
     return api().get(`index/${userId}`)
+  },
+  userIndex (userId) {
+    return api().get('index', {
+      params: {
+        userId: userId
+      }
+    })
   }
 }

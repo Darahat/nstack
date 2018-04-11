@@ -1,4 +1,5 @@
 import api from '@/services/api'
+
 export default{
   index (bookmark) {
     return api().get('bookmarks', {

@@ -29,11 +29,11 @@
                   <li>
                   <v-badge color="grey" overlap left  fab-transition v-if="$store.state.isUserLoggedIn ">
                 <span slot="badge">0</span>
-                <v-btn icon v-if="isUserLoggedIn && !isFavorite">
-                  <v-icon>favorite</v-icon>
-                </v-btn>
-                <v-btn icon v-if="isUserLoggedIn && isFavorite">
+                <v-btn icon @click ="setFav" v-if="isUserLoggedIn && !fav">
                   <v-icon>favorite_border</v-icon>
+                </v-btn>
+                <v-btn icon @click="unSetFav" v-if="isUserLoggedIn && fav">
+                  <v-icon>favorite</v-icon>
                 </v-btn>
               </v-badge>
               </li>
@@ -48,7 +48,11 @@
                 {{post.description}}
               </p>
               <v-spacer></v-spacer>
-              <div style="text-align:right">
+              <div style="text-align:right" @click="navigateTo({
+                name: 'user',
+                params: {
+                  userId: post.userId
+                }})">
                 <span  class="pb-2 body-2">{{user.username}}</span>
                 <v-avatar
                 class="green"
@@ -81,6 +85,8 @@ import postService from '@/services/postService'
 import userService from '@/services/userService'
 import editPost from '@/components/edit-post'
 import bookmarkService from '@/services/bookmarkService'
+import favoriteService from '@/services/favService'
+
 import {
   mapState
 } from 'vuex'
@@ -90,7 +96,7 @@ export default {
       post: {},
       user: {},
       bookmark: null,
-      isFavorite: true
+      fav: null
 
     }
   },
@@ -100,10 +106,46 @@ export default {
     ])
   },
   methods: {
+    navigateTo (route) {
+      this.$router.push(route)
+    },
+    async userprofile () {
+
+    },
+
+    async setFav () {
+     try{
+       this.fav = (await favoriteService.post({
+         UserId: this.$store.state.user.id,
+         PostId: this.post.id
+       })).data
+      //  console.log(this.$store.state.user.id)
+      //   console.log(this.post.id)
+      //  console.log('fav')
+      //   console.log(fav)
+     }catch (err) {
+        console.log(err)
+     }
+    },
+    async unSetFav(){
+      try{
+        // console.log('lal alaland\n\n\n\n')
+        // console.log(this.fav.id)
+        await favoriteService.delete(this.fav.id)
+        this.fav = null
+        console.log('after delete\n\n\n\n\n\n\n')
+        console.log(this.fav)
+      }catch (err) {
+        console.log(err)
+     }
+    },
+  
+//bookmark////////////////////////////////////////////////////////////
+
     async setAsBookmark () {
       try {
-        console.log(this.post.id)
-        console.log(this.$store.state.user.id)
+        // console.log(this.post.id)
+        // console.log(this.$store.state.user.id)
         this.bookmark = (await bookmarkService.post({
           postId: this.post.id,
           userId: this.$store.state.user.id
@@ -114,7 +156,8 @@ export default {
     },
     async setAsUnbookmark () {
       try {
-        console.log(this.bookmark.Id)
+        // console.log('bookmarkId\n\n\n\n\n\n\n\n\n')
+        // console.log(this.bookmark.Id)
         await bookmarkService.delete(this.bookmark.id)
         this.bookmark = null
       } catch (err) {
@@ -143,6 +186,11 @@ export default {
       // console.log(this.post.id)
       // console.log(this.$store.state.user.id)
       // console.log('bookmark', this.bookmark)
+      this.fav = (await favoriteService.index({
+        postId: this.post.id,
+        userId: this.$store.state.user.id
+      })).data
+      // console.log('favorite hello jello \n\n\n\n\n\n\n\n',this.fav)
     } catch (err) {
       console.log(err)
     }
@@ -156,6 +204,7 @@ export default {
       // console.log(this.$store.state.user.id)
       this.post = (await postService.show(postId)).data
       this.user = (await userService.show(userId)).data
+      
     } catch (err) {
       console.log(err)
     }
@@ -169,8 +218,4 @@ li{
       list-style: none;
 }
 </style>
-//  @click="navigateTo({
-//                 name: 'user',
-//                 params: {
-//                   userId: post.userId
-//                 }})"
+
