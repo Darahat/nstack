@@ -1,5 +1,5 @@
 const {SavedPost} = require('../models')
-const _ = require('lodash')
+// const _ = require('lodash')
 
 module.exports = {
   async index (req, res) {
@@ -7,13 +7,15 @@ module.exports = {
       const {userId, postId} = req.query
       // console.log('req.query')
       // console.log(req.query)
-      const bookmarks = await SavedPost.findAll()
+      // const bookmarks = await SavedPost.findAll()
       // console.log('alskdfjlaskjdf\n\n\n\n\n\n')
       // console.log(bookmarks)
 
-      const bookmark = _.find(bookmarks, {
-        UserId: userId,
-        PostId: postId
+      const bookmark = await SavedPost.findOne({
+        where: {
+          UserId: userId,
+          PostId: postId
+        }
       })
       // console.log(bookmark)
       res.send(bookmark)
