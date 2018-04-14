@@ -1,84 +1,84 @@
 <template>
-<div>
-  <v-layout>
-    <v-flex xs12 sm12 offset-sm0>
-      <v-card flat>
-        <v-card-media class="white--text" height="400px" :src="post.imgurl">
+  <div>
+    <v-layout>
+      <v-flex xs12 sm12 offset-sm0>
+        <v-card flat>
+          <v-card-media class="white--text" height="400px" :src="post.imgurl">
+            <v-container fill-height fluid>
+              <v-layout fill-height>
+                <v-flex xs12 align-end flexbox mt-5 pt-5>
+                  <span class="white--text">{{post.createdAt}}</span>
+                  <br>
+                  <span class="headline">{{post.title}}</span>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-card-media>
           <v-container fill-height fluid>
             <v-layout fill-height>
-              <v-flex xs12 align-end flexbox mt-5 pt-5>
-                <span class="white--text">{{post.createdAt}}</span>
-                <br>
-                <span class="headline">{{post.title}}</span>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card-media>
-        <v-container fill-height fluid>
-          <v-layout fill-height>
-            <v-flex xs6 sm1 justify offset-sm1 mt-3 pt-3>
-              <ul>
-              <li>
-              <v-btn icon @click="setAsBookmark" v-if="isUserLoggedIn && !bookmark">
-                <v-icon>bookmark_border</v-icon>
-              </v-btn>
-              <v-btn icon @click="setAsUnbookmark" v-if="isUserLoggedIn && bookmark">
-                <v-icon>bookmark</v-icon>
-              </v-btn>
-                </li>
+              <v-flex xs1 sm1 justify offset-sm1 mt-3 pt-3>
+                <ul>
                   <li>
-                  <v-badge color="grey" overlap left  fab-transition v-if="$store.state.isUserLoggedIn ">
-                <span slot="badge">0</span>
-                <v-btn icon @click ="setFav" v-if="isUserLoggedIn && !fav">
-                  <v-icon>favorite_border</v-icon>
-                </v-btn>
-                <v-btn icon @click="unSetFav" v-if="isUserLoggedIn && fav">
-                  <v-icon>favorite</v-icon>
-                </v-btn>
-              </v-badge>
-              </li>
-                <li>
-                  <edit-post/>
-                </li>
-              </ul>
-            </v-flex>
-            <v-flex xs6 sm5 justify offset-sm2 mt-3 pt-3>
-              <span class="headline">Demo Test</span>
-              <p style="line-height:30px; font-size:12px;text-align:justify; word-space:1px">
-                {{post.description}}
-              </p>
-              <v-spacer></v-spacer>
-              <div style="text-align:right" @click="navigateTo({
+                    <v-btn icon @click="setAsBookmark" v-if="isUserLoggedIn && !bookmark">
+                      <v-icon>bookmark_border</v-icon>
+                    </v-btn>
+                    <v-btn icon @click="setAsUnbookmark" v-if="isUserLoggedIn && bookmark">
+                      <v-icon>bookmark</v-icon>
+                    </v-btn>
+                  </li>
+                  <li>
+                    <v-badge color="grey" overlap left fab-transition v-if="$store.state.isUserLoggedIn ">
+                      <span slot="badge">0</span>
+                      <v-btn icon @click="setFav" v-if="isUserLoggedIn && !fav">
+                        <v-icon>favorite_border</v-icon>
+                      </v-btn>
+                      <v-btn icon @click="unSetFav" v-if="isUserLoggedIn && fav">
+                        <v-icon>favorite</v-icon>
+                      </v-btn>
+                    </v-badge>
+                  </li>
+                  <li>
+                    <edit-post/>
+                  </li>
+                </ul>
+              </v-flex>
+              <v-flex xs6 sm5 justify offset-sm1 mt-3 pt-3>
+                <span class="headline">Demo Test</span>
+                <p style="line-height:30px; font-size:12px;text-align:justify; word-space:1px">
+                  {{post.description}}
+                </p>
+                <v-spacer></v-spacer>
+                <div style="text-align:right" @click="navigateTo({
                 name: 'user',
                 params: {
                   userId: post.userId
                 }})">
-                <span  class="pb-2 body-2">{{user.username}}</span>
-                <v-avatar
-                class="green"
-                size="20px"
-            >
-              <i dark class="fa fa-user"></i>
-              </v-avatar>
-                <p class="grey--text caption pb-3">Senior Executive & <br>Human Resource Manager(HRM) <br>Lilo corp.</p>
-              </div>
-            </v-flex>
-          </v-layout>
-        </v-container>
-        <!-- <v-card->
-          <v-btn flat color="orange">Share</v-btn>
-          <v-btn flat color="orange">Explore</v-btn>
-        </v-card-actions> -->
-      </v-card>
-    </v-flex>
-  </v-layout>
-  <bottom-options/>
-  <foot-bar/>
-</div>
+                  <span class="pb-2 body-2">{{user.username}}</span>
+                  <v-avatar class="green" size="20px">
+                    <i dark class="fa fa-user"></i>
+                  </v-avatar>
+                  <p class="grey--text caption pb-3">Senior Executive &
+                    <br>Human Resource Manager(HRM)
+                    <br>Lilo corp.</p>
+                </div>
+              </v-flex>
+              <v-flex xs5 sm5 justify offset-sm1 mt-3 pt-3>
+                <saved-post/>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card>
+      </v-flex>
+    </v-layout>
+    <bottom-options/>
+    <foot-bar/>
+  </div>
 
 </template>
+
 <script>
 import panel from '@/components/panel'
+import savedPost from '@/components/savedPost'
 import footBar from '@/components/footer'
 import bottomOptions from '@/components/bottomoptions'
 import postService from '@/services/postService'
@@ -95,6 +95,7 @@ export default {
     return {
       post: {},
       user: {},
+      bookmarks: [],
       bookmark: null,
       fav: null
 
@@ -114,33 +115,33 @@ export default {
     },
 
     async setFav () {
-     try{
-       this.fav = (await favoriteService.post({
-         UserId: this.$store.state.user.id,
-         PostId: this.post.id
-       })).data
-      //  console.log(this.$store.state.user.id)
-      //   console.log(this.post.id)
-      //  console.log('fav')
-      //   console.log(fav)
-     }catch (err) {
+      try {
+        this.fav = (await favoriteService.post({
+          UserId: this.$store.state.user.id,
+          PostId: this.post.id
+        })).data
+        //  console.log(this.$store.state.user.id)
+        //   console.log(this.post.id)
+        //  console.log('fav')
+        //   console.log(fav)
+      } catch (err) {
         console.log(err)
-     }
+      }
     },
-    async unSetFav(){
-      try{
+    async unSetFav () {
+      try {
         // console.log('lal alaland\n\n\n\n')
         // console.log(this.fav.id)
         await favoriteService.delete(this.fav.id)
         this.fav = null
         console.log('after delete\n\n\n\n\n\n\n')
         console.log(this.fav)
-      }catch (err) {
+      } catch (err) {
         console.log(err)
-     }
+      }
     },
-  
-//bookmark////////////////////////////////////////////////////////////
+
+    // bookmark
 
     async setAsBookmark () {
       try {
@@ -169,32 +170,33 @@ export default {
     panel,
     footBar,
     bottomOptions,
-    editPost
+    editPost,
+    savedPost
   },
   watch: {
-    async post(){
- if (!this.isUserLoggedIn) {
-      return
+    async post () {
+      if (!this.isUserLoggedIn) {
+        return
+      }
+      try {
+        // const postId = this.$store.state.route.params.postId
+        // const userId = this.$store.state.route.params.userId
+        this.bookmark = (await bookmarkService.index({
+          postId: this.post.id,
+          userId: this.$store.state.user.id
+        })).data
+        // console.log(this.post.id)
+        // console.log(this.$store.state.user.id)
+        // console.log('bookmark', this.bookmark)
+        this.fav = (await favoriteService.index({
+          postId: this.post.id,
+          userId: this.$store.state.user.id
+        })).data
+        // console.log('favorite hello jello \n\n\n\n\n\n\n\n',this.fav)
+      } catch (err) {
+        console.log(err)
+      }
     }
-    try {
-      // const postId = this.$store.state.route.params.postId
-      // const userId = this.$store.state.route.params.userId
-      this.bookmark = (await bookmarkService.index({
-        postId: this.post.id,
-        userId: this.$store.state.user.id
-      })).data
-      // console.log(this.post.id)
-      // console.log(this.$store.state.user.id)
-      // console.log('bookmark', this.bookmark)
-      this.fav = (await favoriteService.index({
-        postId: this.post.id,
-        userId: this.$store.state.user.id
-      })).data
-      // console.log('favorite hello jello \n\n\n\n\n\n\n\n',this.fav)
-    } catch (err) {
-      console.log(err)
-    }
-  }
   },
   async mounted () {
     try {
@@ -204,13 +206,11 @@ export default {
       // console.log(this.$store.state.user.id)
       this.post = (await postService.show(postId)).data
       this.user = (await userService.show(userId)).data
-      
     } catch (err) {
       console.log(err)
     }
   }
 }
-
 </script>
 
 <style>
@@ -218,4 +218,3 @@ li{
       list-style: none;
 }
 </style>
-

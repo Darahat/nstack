@@ -27,7 +27,6 @@
       </v-flex>
     </v-layout>
   </v-container>
-    
     <!-- <v-container grid-list-md offset-sm3 mt-5>
     <v-layout row wrap>
       <v-flex xs12 sm4 v-for="post in userPosts" :key="post.userid">
@@ -91,20 +90,21 @@ export default {
     }
   },
   components: {
-    userPosts,userinfo
+    userPosts,
+    userinfo
   },
   methods: {
-  navigateTo (route) {
-    this.$router.push(route)
-  },
-// watch: {
-//     '$route.query.search': {
-//       immediate: true,
-//       async handler (value) {
-//         this.posts = (await postService.index(value)).data
-//       }
-//     }
-//   },
+    navigateTo (route) {
+      this.$router.push(route)
+    }
+    // watch: {
+    //     '$route.query.search': {
+    //       immediate: true,
+    //       async handler (value) {
+    //         this.posts = (await postService.index(value)).data
+    //       }
+    //     }
+    //   },
 
   },
   async mounted () {
@@ -115,7 +115,7 @@ export default {
     this.userPosts = (await postService.userIndex(this.userId)).data
     console.log('userposts\n\n\n\n')
     console.log(this.userPosts)
-}
+  }
 }
 </script>
 <style >

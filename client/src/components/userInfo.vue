@@ -30,7 +30,7 @@
 </template>
 <script>
 import userService from '@/services/userService'
-  export default {
+export default {
   data () {
     return {
       user: {},
@@ -41,19 +41,20 @@ import userService from '@/services/userService'
   // navigateTo (route) {
   //   this.$router.push(route)
   // },
-// watch: {
-//     '$route.query.search': {
-//       immediate: true,
-//       async handler (value) {
-//         this.posts = (await postService.index(value)).data
-//       }
-//     }
-//   },
+  // watch: {
+  //     '$route.query.search': {
+  //       immediate: true,
+  //       async handler (value) {
+  //         this.posts = (await postService.index(value)).data
+  //       }
+  //     }
+  //   },
 
   // },
   async mounted () {
     this.userId = this.$store.state.route.params.userId
     this.user = (await userService.show(this.userId)).data
+  }
 }
-}
+
 </script>

@@ -6,6 +6,11 @@ export default{
       params: bookmark
     })
   },
+  indexShow (bookmark) {
+    return api().get('bookmarks', {
+      params: bookmark
+    })
+  },
   post (bookmark) {
     return api().post('bookmarks', bookmark)
   },

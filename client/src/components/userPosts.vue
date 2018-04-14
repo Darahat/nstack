@@ -1,9 +1,6 @@
 <template>
-
-
+<div></div>
 </template>
-
-
 <script>
 import postService from '@/services/postService'
 // import userService from '@/services/userService'

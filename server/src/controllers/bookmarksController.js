@@ -1,6 +1,5 @@
 const {SavedPost} = require('../models')
 // const _ = require('lodash')
-
 module.exports = {
   async index (req, res) {
     try {
@@ -26,6 +25,29 @@ module.exports = {
       })
     }
   },
+  // async indexShow (req, res) {
+  //   try {
+  //     const {userId, postId} = req.query
+  //     console.log('req.query......................\n\n\n\n\n\n\n')
+  //     console.log(req.query)
+  //     // const bookmarks = await SavedPost.findAll()
+
+  //     const bookmarks = await SavedPost.findAll({
+  //       where: {
+  //         UserId: userId,
+  //         PostId: postId
+  //       }
+  //     })
+  //     console.log('bookmarksssss \n\n\n\n\n\n\n\n\n')
+  //     console.log(bookmarks)
+  //     res.send(bookmarks)
+  //   } catch (err) {
+  //     console.log('indexs errors', err)
+  //     res.status(500).send({
+  //       error: 'Error has occured trying to fetch bookmarks pOst'
+  //     })
+  //   }
+  // },
   async  delete (req, res) {
     try {
       const {bookmarkId} = req.params

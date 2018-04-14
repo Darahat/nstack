@@ -14,8 +14,9 @@ module.exports = (app) => {
   app.get('/index/:postId', PostController.show)
   app.get('/userIndex', userController.index)
   app.get('/userIndex/:userId', userController.show)
-  app.get('/userIndex/:userId', PostController.getPostByUserId)
+  // app.get('/userIndex/:userId', PostController.getPostByUserId)
   app.get('/bookmarks', bookmarksController.index)
+  // app.get('/bookmarks', bookmarksController.indexShow)
   app.post('/bookmarks', bookmarksController.post)
   app.delete('/bookmarks/:bookmarkId', bookmarksController.delete)
 
