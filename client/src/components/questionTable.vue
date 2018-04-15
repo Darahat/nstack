@@ -11,7 +11,6 @@
                   postId: post.id,
                   userId: post.userId
                 }})">
-            >
             </v-card-media>
             <v-card-actions>
               <v-spacer></v-spacer>

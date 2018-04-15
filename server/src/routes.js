@@ -4,7 +4,7 @@ const userController = require('./controllers/UserController')
 const bookmarksController = require('./controllers/bookmarksController')
 const favoriteController = require('./controllers/favoriteController')
 const authenticationControllerPolicy = require('./policies/authenticationControllerPolicy')
-// const getAllPostController = require('./controllers/getAllPostController')
+const commentController = require('./controllers/commentController')
 module.exports = (app) => {
   app.post('/register', authenticationControllerPolicy.register, authenticationController.register)
   app.post('/login', authenticationController.login)
@@ -23,4 +23,7 @@ module.exports = (app) => {
   app.get('/favorites', favoriteController.index)
   app.post('/favorites', favoriteController.post)
   app.delete('/favorites/:favoriteId', favoriteController.delete)
+  app.get('/comments', commentController.index)
+  app.post('/comments', commentController.post)
+  app.delete('/comments/:commentId', commentController.delete)
 }

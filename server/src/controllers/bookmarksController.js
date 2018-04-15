@@ -1,23 +1,32 @@
-const {SavedPost} = require('../models')
-// const _ = require('lodash')
+const {SavedPost, Post} = require('../models')
+const _ = require('lodash')
 module.exports = {
   async index (req, res) {
     try {
       const {userId, postId} = req.query
-      // console.log('req.query')
-      // console.log(req.query)
       // const bookmarks = await SavedPost.findAll()
       // console.log('alskdfjlaskjdf\n\n\n\n\n\n')
       // console.log(bookmarks)
-
-      const bookmark = await SavedPost.findOne({
-        where: {
-          UserId: userId,
-          PostId: postId
-        }
+      const where = {
+        UserId: userId
+      }
+      if (postId) {
+        where.PostId = postId
+      }
+      // console.log('postId\n\n\n\n\n\n\n')
+      // console.log(where)
+      const bookmarks = await SavedPost.findAll({
+        where: where,
+        include: [
+          {
+            model: Post
+          }
+        ]
       })
+        .map(bookmark => bookmark.toJSON())
+        .map(bookmark => _.extend({}, bookmark.Post, bookmark))
       // console.log(bookmark)
-      res.send(bookmark)
+      res.send(bookmarks)
     } catch (err) {
       console.log('indexs errors', err)
       res.status(500).send({
@@ -52,7 +61,8 @@ module.exports = {
     try {
       const {bookmarkId} = req.params
       const bookmark = await SavedPost.findById(bookmarkId)
-      console.log(bookmarkId)
+      console.log('sdfsdafasdfsadfsadf')
+      console.log(req.params)
       await bookmark.destroy()
       res.send(bookmark)
     } catch (err) {
@@ -63,10 +73,26 @@ module.exports = {
     }
   },
   async post (req, res) {
+    console.log(req.body)
+    console.log(req.body)
+    const {postId, userId} = req.body
     try {
+      const bookmark = await SavedPost.findOne({
+        where: {
+          PostId: postId,
+          UserId: userId
+        }
+      })
+      console.log('newBookmark\n\n\n\n\n\n\n\n\\n\n')
+      console.log(postId)
+      if (bookmark) {
+        return res.status(400).send({
+          error: 'you already have this set as a bookmark'
+        })
+      }
       const newBookmark = await SavedPost.create({
-        UserId: req.body.userId,
-        PostId: req.body.postId
+        UserId: userId,
+        PostId: postId
       })
       res.send(newBookmark)
     } catch (err) {

@@ -1,15 +1,19 @@
 <template>
-
  <v-data-table
       :headers="headers"
       :pagination.sync="pagination"
       :items="bookmarks">
       <template slot='items' slot-scope='props'>
-        <td class='text-xs-right'>
-          {{props.item.title}}
+        <td class='text-xs-left' @click="navigateTo({
+                name: 'post',
+                params: {
+                  postId: props.item.Post.id,
+                  userId: user.id
+                }})">
+        {{props.item.title}}
         </td>
-        <td class="text-xs-right">
-          {{props.item.artist}}
+        <td class='text-xs-right' >
+          <img style="width:25px; height:25px" :src="props.item.imgurl" alt="">
         </td>
       </template>
     </v-data-table>
@@ -23,6 +27,9 @@ import {
 export default {
   data () {
     return {
+      post: {},
+      postId: null,
+      userId: null,
       headers: [{
         text: 'Title',
         value: 'title'
@@ -43,16 +50,31 @@ export default {
   {
     ...mapState([
       'isUserLoggedIn',
-      'user'
+      'user',
     ])
   },
   async mounted () {
     if (this.isUserLoggedIn) {
       this.bookmarks = (await bookmarkService.index({
-        userId: this.user.id
+        userId: this.user.id,
+      //   postId: this.user.id
       })).data
     }
-    console.log(this.bookmarks)
+    try {
+      // this.postId = this.$store.state.route.params.postId
+      // this.userId = this.$store.state.user.id
+      // console.log(this.postId)
+      // console.log(this.userId)
+      // this.post = (await postService.show(postId)).data
+      //  this.user = (await userService.show(userId)).data
+    }catch(err){
+          console.log(err)
+    }
+  },
+  methods:{
+  navigateTo(route){
+        this.$router.push(route)
   }
+}
 }
 </script>

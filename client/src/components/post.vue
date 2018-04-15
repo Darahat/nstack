@@ -61,9 +61,10 @@
                     <br>Human Resource Manager(HRM)
                     <br>Lilo corp.</p>
                 </div>
+                <comment :post="post" :user="user"></comment>
               </v-flex>
               <v-flex xs5 sm5 justify offset-sm1 mt-3 pt-3>
-                <saved-post/>
+                <saved-post></saved-post>
               </v-flex>
             </v-layout>
           </v-container>
@@ -79,6 +80,7 @@
 <script>
 import panel from '@/components/panel'
 import savedPost from '@/components/savedPost'
+import comment from '@/components/comment'
 import footBar from '@/components/footer'
 import bottomOptions from '@/components/bottomoptions'
 import postService from '@/services/postService'
@@ -147,7 +149,7 @@ export default {
       try {
         // console.log(this.post.id)
         // console.log(this.$store.state.user.id)
-        this.bookmark = (await bookmarkService.post({
+        const bookmarks = (await bookmarkService.post({
           postId: this.post.id,
           userId: this.$store.state.user.id
         })).data
@@ -171,7 +173,8 @@ export default {
     footBar,
     bottomOptions,
     editPost,
-    savedPost
+    savedPost,
+    comment
   },
   watch: {
     async post () {
@@ -181,13 +184,17 @@ export default {
       try {
         // const postId = this.$store.state.route.params.postId
         // const userId = this.$store.state.route.params.userId
-        this.bookmark = (await bookmarkService.index({
+        const bookmarks = (await bookmarkService.index({
           postId: this.post.id,
           userId: this.$store.state.user.id
         })).data
+        if(bookmarks.length){
+          this.bookmark = bookmarks[0]
+        }
+        console.log('check bookmark\n\n\n\n\n\n\n')
         // console.log(this.post.id)
         // console.log(this.$store.state.user.id)
-        // console.log('bookmark', this.bookmark)
+        console.log('bookmark', this.bookmarks)
         this.fav = (await favoriteService.index({
           postId: this.post.id,
           userId: this.$store.state.user.id
