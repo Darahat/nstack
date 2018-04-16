@@ -5,7 +5,7 @@
 import postService from '@/services/postService'
 // import userService from '@/services/userService'
 import blank from '@/components/blank'
-import search from '@/components/search'
+import search from '@/components/posts/search'
 export default {
   data () {
     return {

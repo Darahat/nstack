@@ -5,7 +5,7 @@
 
       <v-flex xs12 sm4 v-for="post in posts" :key="post.id">
           <v-card >
-            <v-card-media class="white--text" height="200px" :src="post.imgurl" @click="navigateTo({
+            <v-card-media class="animated fadeIn white--text" height="200px" :src="post.imgurl" @click="navigateTo({
                 name: 'post',
                 params: {
                   postId: post.id,
@@ -14,7 +14,7 @@
             </v-card-media>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-container fill-height fluid style="text-align:left">
+              <v-container fill-height animated fadeInLeftBig fluid style="text-align:left">
                 <v-layout fill-height>
                   <v-flex xs12 align-end flexbox>
                     <span class="subheading grey--text">{{post.title}}</span>
@@ -44,7 +44,7 @@
 import postService from '@/services/postService'
 // import userService from '@/services/userService'
 import blank from '@/components/blank'
-import search from '@/components/search'
+import search from '@/components/posts/search'
 export default {
   data () {
     return {

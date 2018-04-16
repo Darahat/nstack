@@ -10,7 +10,7 @@
                 <v-layout row wrap>
                   <v-flex xs12 sm9>
                     <p class="title" style="margin-bottom:30px">Nstack</p>
-                    <v-text-field solo type="text" name="username" prepend-icon="person" placeholder="Username" v-model="username" class="t-field"></v-text-field>
+                    <v-text-field solo type="text" name="username" prepend-icon="person" placeholder="Username" v-model="username" class=" t-field"></v-text-field>
                     <v-text-field solo type="email" v-model="email" name="email" prepend-icon="email" placeholder="Email"  class="t-field"></v-text-field>
                     <v-text-field solo type="password" v-model="password" name="password" prepend-icon="lock" placeholder="Password" class="t-field" ></v-text-field>
                     <div class="red--text" v-html="error" />
@@ -19,7 +19,7 @@
                         <span style="color:gray;">Forgot password?</span>
                       </v-flex>
                       <v-flex xs12 sm6>
-                        <v-btn color="blue" class="white--text" @click="register">Register</v-btn>
+                        <v-btn color="blue" name="animate" class="white--text" @click="register">Register</v-btn>
                       </v-flex>
                     </div>
                   </v-flex>
@@ -67,5 +67,32 @@ export default {
 }
 
 </script>
-<style scoped>
+<style>
+.animate-enter-active{
+  animation: coming 5s;
+  animation-delay: 3s;
+  opacity: 0;
+}
+.img-animation-leave-active{
+  animation:going 1s;
+}
+@keyframes going {
+  from{
+    transform: translateX(0)
+  }
+  to{
+    transform:translateX(-150px);
+    opacity: 0;
+  }
+}
+@keyframes coming {
+  from{
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to{
+    transform:translateX(0);
+    opacity: 1;
+  }
+}
 </style>

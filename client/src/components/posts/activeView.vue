@@ -15,10 +15,10 @@
 </div>
 </template>
 <script>
-import tableData from '@/components/questionTable'
+import tableData from '@/components/posts/questionTable'
 // import linkPost from '@/components/linkpost'
-import footerPanel from '@/components/footer'
-import bottomOptions from '@/components/bottomoptions'
+import footerPanel from '@/components/global/footer'
+import bottomOptions from '@/components/global/bottomoptions'
 export default {
   components: {
     tableData, footerPanel, bottomOptions

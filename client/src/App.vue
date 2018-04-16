@@ -1,12 +1,14 @@
 <template>
   <div id="app">
     <panel></panel>
+    <transition name="img-animation">
     <router-view/>
+    </transition>
   </div>
 </template>
 
 <script>
-import panel from '@/components/panel'
+import panel from '@/components/global/panel'
 // import blank from '@/components/blank'
 export default {
   components: {
@@ -17,6 +19,8 @@ export default {
 </script>
 
 <style>
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css";
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -52,5 +56,32 @@ h6{
 }
 .t-field{
   margin-bottom:10px
+}
+.img-animation-enter-active{
+  animation: coming 1s;
+  animation-delay: .5s;
+  opacity: 0;
+}
+.img-animation-leave-active{
+  animation:going 1s;
+}
+@keyframes going {
+  from{
+    transform: translateX(0)
+  }
+  to{
+    transform:translateX(-150px);
+    opacity: 0;
+  }
+}
+@keyframes coming {
+  from{
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to{
+    transform:translateX(0);
+    opacity: 1;
+  }
 }
 </style>

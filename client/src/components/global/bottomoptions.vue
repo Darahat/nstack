@@ -20,7 +20,7 @@
 #foot{
        width: 100%;
        height: 100%;
-       background-image: url('../assets/back.jpeg');
+       background-image: url('../../assets/back.jpeg');
 }
 li{
   font-size: 7px;

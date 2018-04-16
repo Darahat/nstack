@@ -3,7 +3,7 @@
     <v-layout>
       <v-flex xs12 sm12 offset-sm0>
         <v-card flat>
-          <v-card-media class="white--text" height="400px" :src="post.imgurl">
+          <v-card-media class="animated fadeInRightBig white--text" height="400px" :src="post.imgurl">
             <v-container fill-height fluid>
               <v-layout fill-height>
                 <v-flex xs12 align-end flexbox mt-5 pt-5>
@@ -63,9 +63,6 @@
                 </div>
                 <comment :post="post" :user="user"></comment>
               </v-flex>
-              <v-flex xs5 sm5 justify offset-sm1 mt-3 pt-3>
-                <saved-post></saved-post>
-              </v-flex>
             </v-layout>
           </v-container>
         </v-card>
@@ -78,14 +75,14 @@
 </template>
 
 <script>
-import panel from '@/components/panel'
-import savedPost from '@/components/savedPost'
-import comment from '@/components/comment'
-import footBar from '@/components/footer'
-import bottomOptions from '@/components/bottomoptions'
+import panel from '@/components/global/panel'
+import savedPost from '@/components/postView/savedPost'
+import comment from '@/components/postView/comment'
+import footBar from '@/components/global/footer'
+import bottomOptions from '@/components/global/bottomoptions'
 import postService from '@/services/postService'
 import userService from '@/services/userService'
-import editPost from '@/components/edit-post'
+import editPost from '@/components/postView/edit-post'
 import bookmarkService from '@/services/bookmarkService'
 import favoriteService from '@/services/favService'
 

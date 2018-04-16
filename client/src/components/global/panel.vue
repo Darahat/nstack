@@ -20,7 +20,7 @@
       </v-list>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-tile v-for="item in items" @click.stop="drawer = !drawer" :key="item.title" @click="navigateTo('/index')">
+        <v-list-tile v-for="item in items" @click.stop="drawer = !drawer" :key="item.title" @click="navigateTo({name:item.name})">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -61,7 +61,7 @@
 </style>
 <script>
 import userService from '@/services/userService'
-import linkPost from '@/components/linkpost'
+import linkPost from '@/components/global/linkpost'
 export default {
   methods: {
     navigateTo (route) {
@@ -95,7 +95,23 @@ export default {
       title: 'Home',
       icon: 'dashboard',
       name: 'index'
-    }]
+    },
+    {
+      title: 'My Bookmarks',
+      icon: 'bookmark',
+      name: 'bookmarks'
+    },
+    {
+      title: 'Logout',
+      icon: 'fa-sign-out',
+      name: 'login'
+    },
+    {
+      title: 'Register',
+      icon: 'fa-user-register',
+      name: 'register'
+    }
+    ]
   })
 }
 

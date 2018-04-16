@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Register from '@/components/register'
-import Login from '@/components/login'
-import index from '@/components/activeView'
-import post from '@/components/post'
+import Register from '@/components/user/register'
+import Login from '@/components/user/login'
+import index from '@/components/posts/activeView'
+import post from '@/components/postView/post'
+import savedPost from '@/components/postView/savedPost'
 import user from '@/components/userProfile'
 
 // import addpost from '@/components/addPost'
@@ -20,6 +21,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/bookmarks',
+      name: 'bookmarks',
+      component: savedPost
     },
     {
       path: '/userProfile/:userId',
