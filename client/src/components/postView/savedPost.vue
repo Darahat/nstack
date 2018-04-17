@@ -4,7 +4,8 @@
       :pagination.sync="pagination"
       :items="bookmarks">
       <template slot='items' slot-scope='props'>
-        <td class='text-xs-left' @click="navigateTo({
+        <v-card >
+        <td class='animated slideInUp b-data' @click="navigateTo({
                 name: 'post',
                 params: {
                   postId: props.item.Post.id,
@@ -12,9 +13,10 @@
                 }})">
         {{props.item.title}}
         </td>
-        <td class='text-xs-right' >
+        <!-- <td class='text-xs-right' >
           <img style="width:25px; height:25px" :src="props.item.imgurl" alt="">
-        </td>
+        </td> -->
+        </v-card>
       </template>
     </v-data-table>
 
@@ -31,16 +33,12 @@ export default {
       postId: null,
       userId: null,
       headers: [{
-        text: 'Title',
-        value: 'title'
+        text: 'Bookmarks',
+        value: 'Saved Posts'
       },
-      {
-        text: 'Artist',
-        value: 'artist'
-      }
       ],
       pagination: {
-        sortBy: 'date',
+        sortBy: 'createdAt',
         descending: true
       },
       bookmarks: []
@@ -78,3 +76,9 @@ export default {
 }
 }
 </script>
+<style>
+.b-data {
+  color:skyblue;
+  font-size: 5vw;
+}
+</style>

@@ -4,7 +4,7 @@
     <v-layout row wrap>
 
       <v-flex xs12 sm4 v-for="post in posts" :key="post.id">
-          <v-card >
+          <v-card>
             <v-card-media class="animated fadeIn white--text" height="200px" :src="post.imgurl" @click="navigateTo({
                 name: 'post',
                 params: {
@@ -45,10 +45,11 @@ import postService from '@/services/postService'
 // import userService from '@/services/userService'
 import blank from '@/components/blank'
 import search from '@/components/posts/search'
+import _ from 'lodash'
 export default {
   data () {
     return {
-      posts: null
+      posts: []
       //  post: {},
       // user: {}
     }
@@ -62,7 +63,9 @@ export default {
       immediate: true,
       async handler (value) {
         this.posts = (await postService.index(value)).data
+      _.orderBy(this.posts, ['title', 'imgurl'], ['desc', 'asc'])
       }
+      
     }
   },
   methods: {

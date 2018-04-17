@@ -42,7 +42,7 @@
                   </li>
                 </ul>
               </v-flex>
-              <v-flex xs6 sm5 justify offset-sm1 mt-3 pt-3>
+              <v-flex xs12 sm5 justify offset-sm1 mt-3 pt-3>
                 <span class="headline">Demo Test</span>
                 <p style="line-height:30px; font-size:12px;text-align:justify; word-space:1px">
                   {{post.description}}
@@ -61,7 +61,7 @@
                     <br>Human Resource Manager(HRM)
                     <br>Lilo corp.</p>
                 </div>
-                <comment :post="post" :user="user"></comment>
+                <comment :post="post" :user="user">Comments</comment>
               </v-flex>
             </v-layout>
           </v-container>

@@ -7,9 +7,11 @@ import feather from 'vue-icon'
 import vueawsome from 'vue-awesome'
 import {sync} from 'vuex-router-sync'
 import store from '@/store/store'
+import VueClazyLoad from 'vue-clazy-load'
 
 Vue.use(feather, 'v-icon')
 Vue.use(Vuetify)
+Vue.use(VueClazyLoad)
 Vue.use(vueawsome)
 Vue.config.productionTip = false
 sync(store, router)

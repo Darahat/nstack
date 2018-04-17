@@ -8,7 +8,7 @@
             <v-flex pt-5>
               <div>
                 <v-layout row wrap>
-                  <v-flex xs12 sm10>
+                  <v-flex md12 sm10>
                     <p class="title" style="margin-bottom:30px">Nstack</p>
                     <v-text-field solo prepend-icon="person"  v-model="email" class="animated fadeInLeft t-field" label="E-mail" style="margin-bottom:10px"></v-text-field>
                     <v-text-field solo prepend-icon="lock"  v-model="password" class="animated fadeInLeft t-field" label="Password"></v-text-field>

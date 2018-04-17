@@ -7,7 +7,7 @@
     >
       <v-list>
         <v-list-tile avatar>
-          <v-list-tile-avatar>
+          <v-list-tile-avatar v-if="isUserLoggedIn">
             <!-- <img src="account_circle" > -->
             <v-avatar class="indigo">
       <v-icon dark>account_circle</v-icon>
@@ -20,12 +20,44 @@
       </v-list>
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
-        <v-list-tile v-for="item in items" @click.stop="drawer = !drawer" :key="item.title" @click="navigateTo({name:item.name})">
+        <v-list-tile @click.stop="drawer = !drawer" :to="{name:'index'}">
           <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon>dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+            <v-list-tile-title>Home</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile   v-if="isUserLoggedIn"   @click.stop="drawer = !drawer" :to="{name:'bookmarks'}">
+          <v-list-tile-action>
+            <v-icon>bookmarks</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>My Bookmarks</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile v-if="isUserLoggedIn" @click="logout" :to="{name:'login'}">
+          <v-list-tile-action>
+            <v-icon>power_settings_new</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Logout</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile v-if="!isUserLoggedIn" @click.stop="drawer = !drawer" :to="{name:'login'}">
+          <v-list-tile-action>
+            <v-icon>input</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>login</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile v-if="!isUserLoggedIn" @click.stop="drawer = !drawer" :to="{name:'register'}">
+          <v-list-tile-action>
+            <v-icon class="fa-user-register">account_circle</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>Sign Up</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -34,11 +66,11 @@
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title><router-link :to="('/index')" class="title" tag="p">Nstack</router-link></v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down">
+      <!-- <v-toolbar-items class="hidden-sm-and-down">
       <v-btn flat v-if="$store.state.isUserLoggedIn" @click="logout">Log out</v-btn>
       <router-link class="flat" tag="v-btn" v-if="!$store.state.isUserLoggedIn" :to="{name: 'login'}">Login</router-link>
       <router-link flat tag="v-btn" v-if="!$store.state.isUserLoggedIn" :to="{name:'register'}">Sign up</router-link>
-    </v-toolbar-items>
+    </v-toolbar-items> -->
     </v-toolbar>
     <link-post :user="user" v-if="$store.state.isUserLoggedIn"></link-post>
   </v-app>
@@ -62,7 +94,16 @@
 <script>
 import userService from '@/services/userService'
 import linkPost from '@/components/global/linkpost'
+import {
+  mapState
+} from 'vuex'
 export default {
+    computed:
+  {
+    ...mapState([
+      'isUserLoggedIn',
+    ])
+  },
   methods: {
     navigateTo (route) {
       this.$router.push(route)
@@ -73,6 +114,7 @@ export default {
       this.$router.push({
         name: 'index'
       })
+      this.drawer= false
     }
   },
   components: {
