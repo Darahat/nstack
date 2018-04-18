@@ -14,7 +14,7 @@
     </v-avatar>
           </v-list-tile-avatar>
           <v-list-tile-content>
-            <v-list-tile-title>{{user.username}}</v-list-tile-title>
+            <v-list-tile-title v-if="isUserLoggedIn">{{user.username}}</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -133,27 +133,6 @@ export default {
   data: () => ({
     drawer: false,
     user: {},
-    items: [{
-      title: 'Home',
-      icon: 'dashboard',
-      name: 'index'
-    },
-    {
-      title: 'My Bookmarks',
-      icon: 'bookmark',
-      name: 'bookmarks'
-    },
-    {
-      title: 'Logout',
-      icon: 'fa-sign-out',
-      name: 'login'
-    },
-    {
-      title: 'Register',
-      icon: 'fa-user-register',
-      name: 'register'
-    }
-    ]
   })
 }
 

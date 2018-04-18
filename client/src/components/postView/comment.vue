@@ -1,8 +1,9 @@
 <template>
   <v-card color="transparent" flat>
       <v-card-text>
+        <h2 class="grey--text">Comment Section</h2>
         <v-data-table
-      :pagination.sync="pagination"
+        :pagination.sync="pagination"
       :items="comments">
       <template slot='items' slot-scope='props'>
         <td class='text-xs-left'>
@@ -11,7 +12,9 @@
       <v-card color="transparent" >
         <v-card-title>
         <div primary-title>
-          <span class="grey--text" style="font-family: 'Pacifico', cursive;">{{props.item.username}}</span><br>
+          <span class="blue--text" style="font-family: 'Pacifico', cursive;"><v-icon dark class="white">account_circle</v-icon>{{props.item.username}}</span>
+          <v-spacer></v-spacer>
+          <br>
         <span class="grey--text" style="font-size:14px; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;" primary-title>
         {{props.item.postComment}}
         </span>
@@ -23,6 +26,7 @@
         </td>
       </template>
     </v-data-table>
+    <!-- <v-pagination :length="6" v-model="pagination"></v-pagination> -->
         <v-container v-if="isUserLoggedIn" fluid>
           <v-layout row >
             <v-flex xs12>
@@ -35,7 +39,7 @@
               ></v-text-field>
             </v-flex>
           </v-layout>
-          <v-btn  small color="blue" class="white--text" @click="createComment">{{user.username}}</v-btn>
+          <v-btn  small color="blue" class="white--text" @click="createComment">Create Comment</v-btn>
         </v-container>
       </v-card-text>
     </v-card>
@@ -58,7 +62,7 @@ import {
           username:null
         },
       pagination: {
-        sortBy: 'date',
+        sortBy: 'createdAt',
         descending: true
       },
         comments: [],
@@ -73,7 +77,7 @@ import {
         postId: this.$store.state.route.params.postId
       })).data
         }
-        console.log(this.user.username)
+        console.log(this.$store.state.user.username)
         console.log(this.$store.state.route.params.postId)
       }catch (err){
         console.log(err)
@@ -87,10 +91,10 @@ import {
   },
     methods:{
       async createComment () {
-        this.commentdata.userId = this.$store.state.route.params.userId
+        this.commentdata.userId = this.$store.state.user.id
         this.commentdata.postId = this.$store.state.route.params.postId
-        this.commentdata.username = this.user.username
-        console.log(this.user.username)
+        this.commentdata.username = this.$store.state.user.username
+        console.log(this.$store.state.user.username)
         console.log(this.$store.state.route.params.postId)
         try{
         const comment = (await commentService.post(this.commentdata)).data
@@ -99,7 +103,7 @@ import {
         catch(error){
 this.error = error.response.data.error
         }
-      }
+      },
     },
     // async mounted(){
 

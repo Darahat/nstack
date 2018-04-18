@@ -2,7 +2,7 @@
     <div id="link" style="border-bottom:1px solid gray">
     <v-container fluid>
       <v-layout>
-        <v-flex xs12 sm5> Community> Active View</v-flex>
+        <!-- <v-flex xs12 sm5> Community> Active View</v-flex> -->
         <v-spacer></v-spacer>
         <v-flex xs12 sm5>
           <v-btn color="blue" dark @click.stop="dialog = true" class="white--text">New Post</v-btn>
@@ -108,7 +108,7 @@ export default {
         description: null,
         imgurl: null,
         tags: null,
-        userId: null
+        userId: null,
       },
       dialog: false,
       error: null,

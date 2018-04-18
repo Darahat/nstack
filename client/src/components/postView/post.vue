@@ -19,16 +19,20 @@
               <v-flex xs1 sm1 justify offset-sm1 mt-3 pt-3>
                 <ul>
                   <li>
+                    <transition name="fade" mode="out-in">
                     <v-btn icon @click="setAsBookmark" v-if="isUserLoggedIn && !bookmark">
                       <v-icon>bookmark_border</v-icon>
                     </v-btn>
+                    </transition >
+                    <transition name="fade" mode="out-in">
                     <v-btn icon @click="setAsUnbookmark" v-if="isUserLoggedIn && bookmark">
                       <v-icon>bookmark</v-icon>
                     </v-btn>
+                    </transition>
                   </li>
                   <li>
                     <v-badge color="grey" overlap left fab-transition v-if="$store.state.isUserLoggedIn ">
-                      <span slot="badge">0</span>
+                      <!-- <span slot="badge">0</span> -->
                       <v-btn icon @click="setFav" v-if="isUserLoggedIn && !fav">
                         <v-icon>favorite_border</v-icon>
                       </v-btn>
@@ -150,6 +154,7 @@ export default {
           postId: this.post.id,
           userId: this.$store.state.user.id
         })).data
+        this.bookmark = bookmarks
       } catch (err) {
         console.log(err)
       }
@@ -220,5 +225,11 @@ export default {
 <style>
 li{
       list-style: none;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

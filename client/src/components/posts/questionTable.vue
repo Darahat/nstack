@@ -3,8 +3,8 @@
     <search/>
     <v-layout row wrap>
 
-      <v-flex xs12 sm4 v-for="post in posts" :key="post.id">
-          <v-card>
+      <v-flex  xs12 sm4 v-for="post in posts" :key="post.id">
+          <v-card >
             <v-card-media class="animated fadeIn white--text" height="200px" :src="post.imgurl" @click="navigateTo({
                 name: 'post',
                 params: {
@@ -49,7 +49,11 @@ import _ from 'lodash'
 export default {
   data () {
     return {
-      posts: []
+      posts: [],
+      pagination: {
+        sortBy: 'createdAt',
+        descending: true
+      },
       //  post: {},
       // user: {}
     }

@@ -1,11 +1,13 @@
 <template>
+<v-card color="transparent" >
+      <v-card-text>
  <v-data-table
       :headers="headers"
       :pagination.sync="pagination"
-      :items="bookmarks">
+      :items="bookmarks"
+      >
       <template slot='items' slot-scope='props'>
-        <v-card >
-        <td class='animated slideInUp b-data' @click="navigateTo({
+        <td style="font-size:18px; font-family: 'Trebuchet MS'" class='pt-3 justify animated slideInUp b-data' @click="navigateTo({
                 name: 'post',
                 params: {
                   postId: props.item.Post.id,
@@ -13,13 +15,16 @@
                 }})">
         {{props.item.title}}
         </td>
-        <!-- <td class='text-xs-right' >
-          <img style="width:25px; height:25px" :src="props.item.imgurl" alt="">
-        </td> -->
-        </v-card>
+        <td class='text-xs-right' >
+          <span>{{props.item.createdAt}}</span>
+        </td>
+        <td class='text-xs-right' >
+          <img style="width:40px; height:40px" :src="props.item.imgurl" alt="">
+        </td>
       </template>
     </v-data-table>
-
+      </v-card-text>
+</v-card>
 </template>
 <script>
 import bookmarkService from '@/services/bookmarkService'
