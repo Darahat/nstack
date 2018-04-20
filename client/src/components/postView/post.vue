@@ -30,9 +30,8 @@
                     </v-btn>
                     </transition>
                   </li>
-                  <li>
+                  <!-- <li>
                     <v-badge color="grey" overlap left fab-transition v-if="$store.state.isUserLoggedIn ">
-                      <!-- <span slot="badge">0</span> -->
                       <v-btn icon @click="setFav" v-if="isUserLoggedIn && !fav">
                         <v-icon>favorite_border</v-icon>
                       </v-btn>
@@ -40,7 +39,7 @@
                         <v-icon>favorite</v-icon>
                       </v-btn>
                     </v-badge>
-                  </li>
+                  </li> -->
                   <li>
                     <edit-post/>
                   </li>
@@ -88,7 +87,7 @@ import postService from '@/services/postService'
 import userService from '@/services/userService'
 import editPost from '@/components/postView/edit-post'
 import bookmarkService from '@/services/bookmarkService'
-import favoriteService from '@/services/favService'
+// import favoriteService from '@/services/favService'
 
 import {
   mapState
@@ -100,7 +99,7 @@ export default {
       user: {},
       bookmarks: [],
       bookmark: null,
-      fav: null
+      // fav: null
 
     }
   },
@@ -117,32 +116,32 @@ export default {
 
     },
 
-    async setFav () {
-      try {
-        this.fav = (await favoriteService.post({
-          UserId: this.$store.state.user.id,
-          PostId: this.post.id
-        })).data
-        //  console.log(this.$store.state.user.id)
-        //   console.log(this.post.id)
-        //  console.log('fav')
-        //   console.log(fav)
-      } catch (err) {
-        console.log(err)
-      }
-    },
-    async unSetFav () {
-      try {
-        // console.log('lal alaland\n\n\n\n')
-        // console.log(this.fav.id)
-        await favoriteService.delete(this.fav.id)
-        this.fav = null
-        console.log('after delete\n\n\n\n\n\n\n')
-        console.log(this.fav)
-      } catch (err) {
-        console.log(err)
-      }
-    },
+    // async setFav () {
+    //   try {
+    //     this.fav = (await favoriteService.post({
+    //       UserId: this.$store.state.user.id,
+    //       PostId: this.post.id
+    //     })).data
+    //     //  console.log(this.$store.state.user.id)
+    //     //   console.log(this.post.id)
+    //     //  console.log('fav')
+    //     //   console.log(fav)
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // },
+    // async unSetFav () {
+    //   try {
+    //     // console.log('lal alaland\n\n\n\n')
+    //     // console.log(this.fav.id)
+    //     await favoriteService.delete(this.fav.id)
+    //     this.fav = null
+    //     console.log('after delete\n\n\n\n\n\n\n')
+    //     console.log(this.fav)
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // },
 
     // bookmark
 
