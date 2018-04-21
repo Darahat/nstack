@@ -16,21 +16,17 @@
           </v-card-media>
           <v-container fill-height fluid>
             <v-layout fill-height>
-              <v-flex xs1 sm1 justify offset-sm1 mt-3 pt-3>
+              <v-flex xs1 sm1 justify offset-sm2  mr-5 mt-5 pt-3>
                 <ul>
                   <li>
-                    <transition name="fade" mode="out-in">
-                    <v-btn icon @click="setAsBookmark" v-if="isUserLoggedIn && !bookmark">
-                      <v-icon>bookmark_border</v-icon>
-                    </v-btn>
-                    </transition >
-                    <transition name="fade" mode="out-in">
-                    <v-btn icon @click="setAsUnbookmark" v-if="isUserLoggedIn && bookmark">
-                      <v-icon>bookmark</v-icon>
-                    </v-btn>
-                    </transition>
+                      <v-btn icon @click="setAsBookmark" v-if="isUserLoggedIn && !bookmark">
+                        <v-icon>bookmark_border</v-icon>
+                      </v-btn>
+                      <v-btn icon @click="setAsUnbookmark" v-if="isUserLoggedIn && bookmark">
+                        <v-icon>bookmark</v-icon>
+                      </v-btn>
                   </li>
-                  <!-- <li>
+                  <li>
                     <v-badge color="grey" overlap left fab-transition v-if="$store.state.isUserLoggedIn ">
                       <v-btn icon @click="setFav" v-if="isUserLoggedIn && !fav">
                         <v-icon>favorite_border</v-icon>
@@ -39,23 +35,24 @@
                         <v-icon>favorite</v-icon>
                       </v-btn>
                     </v-badge>
-                  </li> -->
+                  </li>
                   <li>
                     <edit-post/>
                   </li>
                 </ul>
               </v-flex>
-              <v-flex xs12 sm5 justify offset-sm1 mt-3 pt-3>
+              <v-flex xs12 sm4 justify offset-sm0 mr-5 mt-3 pt-3>
                 <span class="headline">Demo Test</span>
                 <p style="line-height:30px; font-size:12px;text-align:justify; word-space:1px">
                   {{post.description}}
                 </p>
                 <v-spacer></v-spacer>
-                <div style="text-align:right" @click="navigateTo({
+                <div style="text-align:right" >
+                  <!-- @click="navigateTo({
                 name: 'user',
                 params: {
                   userId: post.userId
-                }})">
+                }})" -->
                   <span class="pb-2 body-2">{{user.username}}</span>
                   <v-avatar class="green" size="20px">
                     <i dark class="fa fa-user"></i>
@@ -74,9 +71,7 @@
     <bottom-options/>
     <foot-bar/>
   </div>
-
 </template>
-
 <script>
 import panel from '@/components/global/panel'
 import savedPost from '@/components/postView/savedPost'
@@ -87,7 +82,7 @@ import postService from '@/services/postService'
 import userService from '@/services/userService'
 import editPost from '@/components/postView/edit-post'
 import bookmarkService from '@/services/bookmarkService'
-// import favoriteService from '@/services/favService'
+import favoriteService from '@/services/favService'
 
 import {
   mapState
@@ -99,7 +94,7 @@ export default {
       user: {},
       bookmarks: [],
       bookmark: null,
-      // fav: null
+      fav: null
 
     }
   },
@@ -116,32 +111,32 @@ export default {
 
     },
 
-    // async setFav () {
-    //   try {
-    //     this.fav = (await favoriteService.post({
-    //       UserId: this.$store.state.user.id,
-    //       PostId: this.post.id
-    //     })).data
-    //     //  console.log(this.$store.state.user.id)
-    //     //   console.log(this.post.id)
-    //     //  console.log('fav')
-    //     //   console.log(fav)
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // },
-    // async unSetFav () {
-    //   try {
-    //     // console.log('lal alaland\n\n\n\n')
-    //     // console.log(this.fav.id)
-    //     await favoriteService.delete(this.fav.id)
-    //     this.fav = null
-    //     console.log('after delete\n\n\n\n\n\n\n')
-    //     console.log(this.fav)
-    //   } catch (err) {
-    //     console.log(err)
-    //   }
-    // },
+    async setFav () {
+      try {
+        this.fav = (await favoriteService.post({
+          UserId: this.$store.state.user.id,
+          PostId: this.post.id
+        })).data
+        //  console.log(this.$store.state.user.id)
+        //   console.log(this.post.id)
+        //  console.log('fav')
+        //   console.log(fav)
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async unSetFav () {
+      try {
+        // console.log('lal alaland\n\n\n\n')
+        // console.log(this.fav.id)
+        await favoriteService.delete(this.fav.id)
+        this.fav = null
+        console.log('after delete\n\n\n\n\n\n\n')
+        console.log(this.fav)
+      } catch (err) {
+        console.log(err)
+      }
+    },
 
     // bookmark
 
@@ -151,7 +146,7 @@ export default {
         // console.log(this.$store.state.user.id)
         const bookmarks = (await bookmarkService.post({
           postId: this.post.id,
-          userId: this.$store.state.user.id
+          // userId: this.$store.state.user.id
         })).data
         this.bookmark = bookmarks
       } catch (err) {
@@ -187,9 +182,9 @@ export default {
         // const userId = this.$store.state.route.params.userId
         const bookmarks = (await bookmarkService.index({
           postId: this.post.id,
-          userId: this.$store.state.user.id
+          // userId: this.$store.state.user.id
         })).data
-        if(bookmarks.length){
+        if (bookmarks.length) {
           this.bookmark = bookmarks[0]
         }
         console.log('check bookmark\n\n\n\n\n\n\n')
@@ -219,6 +214,7 @@ export default {
     }
   }
 }
+
 </script>
 
 <style>

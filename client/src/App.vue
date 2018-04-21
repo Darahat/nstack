@@ -58,12 +58,12 @@ h6{
   margin-bottom:10px
 }
 .img-animation-enter-active{
-  animation: coming 1s;
+  animation: coming .5s;
   animation-delay: .5s;
   opacity: 0;
 }
 .img-animation-leave-active{
-  animation:going 1s;
+  animation:going .5s;
 }
 @keyframes going {
   from{

@@ -3,7 +3,6 @@
     <v-container>
       <p id="ques" style="font-family: 'Open Sans Condensed', sans-serif;font-size:30px;">Didn't find what you
         <br/> are looking for?</p>
-      
     </v-container>
     <v-layout row justify-center>
       <v-btn color="red" dark @click.native.stop="dialog = true" class="white--text">Visit our help center</v-btn>
@@ -43,11 +42,12 @@ li{
 }
 </style>
 <script>
-  export default {
-    data () {
-      return {
-        dialog: false
-      }
+export default {
+  data () {
+    return {
+      dialog: false
     }
   }
+}
+
 </script>

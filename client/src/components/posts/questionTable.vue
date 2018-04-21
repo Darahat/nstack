@@ -1,9 +1,9 @@
 <template>
-  <v-container grid-list-md offset-sm3 mt-5>
+  <v-container grid-list-md offset-sm3 >
     <search/>
     <v-layout row wrap>
 
-      <v-flex  xs12 sm4 v-for="post in posts" :key="post.id">
+      <v-flex  style="cursor: pointer;" xs12 sm4 v-for="post in posts" :key="post.id">
           <v-card >
             <v-card-media class="animated fadeIn white--text" height="200px" :src="post.imgurl" @click="navigateTo({
                 name: 'post',
@@ -37,9 +37,7 @@
       </v-flex>
     </v-layout>
   </v-container>
-
-</template>
-
+  </template>
 <script>
 import postService from '@/services/postService'
 // import userService from '@/services/userService'
@@ -53,7 +51,7 @@ export default {
       pagination: {
         sortBy: 'createdAt',
         descending: true
-      },
+      }
       //  post: {},
       // user: {}
     }
@@ -67,9 +65,8 @@ export default {
       immediate: true,
       async handler (value) {
         this.posts = (await postService.index(value)).data
-      _.orderBy(this.posts, ['title', 'imgurl'], ['desc', 'asc'])
+        _.orderBy(this.posts, ['title', 'imgurl'], ['desc', 'asc'])
       }
-      
     }
   },
   methods: {
@@ -78,6 +75,7 @@ export default {
     }
   }
 }
+
 </script>
 <style>
 </style>

@@ -1,77 +1,37 @@
 <template>
-    <div id="link" style="border-bottom:1px solid gray">
-    <v-container fluid>
-      <v-layout>
-        <!-- <v-flex xs12 sm5> Community> Active View</v-flex> -->
-        <v-spacer></v-spacer>
-        <v-flex xs12 sm5>
-          <v-btn color="blue" dark @click.stop="dialog = true" class="white--text">New Post</v-btn>
-        </v-flex>
-        <v-dialog
-        v-model="dialog"
-        fullscreen
-        transition="dialog-bottom-transition"
-        :overlay="false"
-        scrollable
-        id="dialog"
-      >
-        <v-card color="white" tile>
-          <v-toolbar card dark class="white--text" color="blue darken-1">
-            <v-btn icon @click.native="dialog = false" dark>
-              <v-icon>close</v-icon>
-            </v-btn>
-            <v-toolbar-title>New Post</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <!-- <v-toolbar-items>
+  <div style="border-bottom:1px solid gray">
+    <!-- <v-flex xs12 sm5> Community> Active View</v-flex> -->
+    <span tag="v-list-tile" style="cursor: pointer;" color="blue" dark @click.stop="dialog = true" class="flat mt-2 white--text">
+      <p class="black--text "><v-icon class="material-icons">add_box</v-icon>Add Post</p>
+    </span>
+    <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false" scrollable id="dialog">
+      <v-card color="white" tile>
+        <v-toolbar card dark class="white--text" color="blue darken-1">
+          <v-btn icon @click.native="dialog = false" dark>
+            <v-icon>close</v-icon>
+          </v-btn>
+          <v-toolbar-title>New Post</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <!-- <v-toolbar-items>
               <v-btn dark flat @click.native="dialog = false">Save</v-btn>
             </v-toolbar-items> -->
-          </v-toolbar>
-          <v-card-text>
-            <v-container class="py-3 my-3 mx-5 px-5">
+        </v-toolbar>
+        <v-card-text>
+          <v-container class="py-3 my-3 mx-5 px-5">
             <v-layout row wrap>
               <v-flex xs12>
                 <v-flex xs12>
-              </v-flex>
-                <v-text-field
-                  class="mb-3"
-                  solo
-                  required
-                  :rules = "[required]"
-                  label="Post Title"
-                  v-model="post.title"
-                ></v-text-field>
+                </v-flex>
+                <v-text-field class="mb-3" solo required :rules="[required]" label="Post Title" v-model="post.title"></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
-                class="mb-3"
-                  solo
-                  required
-                  :rules = "[required]"
-                  textarea
-                  label="Post Description"
-                  v-model="post.description"
-                ></v-text-field>
+                <v-text-field class="mb-3" solo required :rules="[required]" textarea label="Post Description" v-model="post.description"></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
-                class="mb-3"
-                  dark
-                  solo
-                  required
-                  :rules = "[required]"
-                  label="Post Image URL"
-                  v-model="post.imgurl"
-                ></v-text-field>
+                <v-text-field class="mb-3" dark solo required :rules="[required]" label="Post Image URL" v-model="post.imgurl"></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
-                class="mb-3"
-                  solo
-                  required
-                  :rules = "[required]"
-                  label="Post Tags"
-                  v-model="post.tags"
-                ></v-text-field>
+                <v-text-field class="mb-3" solo required :rules="[required]" label="Post Tags" v-model="post.tags"></v-text-field>
 
                 <!-- <v-text-field
                   :v-bind="user.username"
@@ -80,21 +40,17 @@
                   v-model="post.userId"
                 >
                 </v-text-field> -->
-
                 <span class="red--text" v-html="error"></span>
                 <v-btn color="blue" @click="createPost" class="white--text">Post</v-btn>
               </v-flex>
             </v-layout>
           </v-container>
-          </v-card-text>
-
-          <div style="flex: 1 1 auto;"/>
-        </v-card>
-      </v-dialog>
-      </v-layout>
-    </v-container>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
+
 <script>
 import postService from '@/services/postService'
 export default {
@@ -108,7 +64,7 @@ export default {
         description: null,
         imgurl: null,
         tags: null,
-        userId: null,
+        userId: null
       },
       dialog: false,
       error: null,
@@ -140,6 +96,7 @@ export default {
     }
   }
 }
+
 </script>
 <style >
 #link{

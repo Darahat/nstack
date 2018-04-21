@@ -1,19 +1,19 @@
 <template>
   <div>
-        <v-text-field solo prepend-icon="search" v-model="search"
-          value="Input text"
-          class="input-group--focused" placeholder="search" style="margin-bottom:10px;" loading></v-text-field>
+    <v-text-field solo prepend-icon="search" v-model="search" class=" mb-4" placeholder="search" single-line></v-text-field>
   </div>
 </template>
 <script>
+import _ from 'lodash'
 export default {
+  
   data () {
     return {
       search: ''
     }
   },
   watch: {
-    search (value) {
+    search: _.debounce(async function  (value) {
       const route = {
         name: 'index'
       }
@@ -23,7 +23,7 @@ export default {
         }
       }
       this.$router.push(route)
-    },
+    },700),
     '$route.query.search': {
       immediate: true,
       async handler (value) {

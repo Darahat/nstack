@@ -1,7 +1,7 @@
 <template>
 <div>
   <!-- <link-post/> -->
-      <v-container>
+      <v-container mt-5>
       <v-flex xs12 sm12>
         <table-data/>
       </v-flex>
