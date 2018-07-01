@@ -1,16 +1,10 @@
-# nstack
-vuejs/node js CRUDE application
-
-
-# Rhymes 
-Rhymes is a NativeScript-built Android app for children to learn some beautiful and populer rhymes with Related images. 
+# Nstack
+Nstack is a vuejs/node js CRUDE application for blogging.Its my first web application using Vuejs+Vuetify+NodeJS. 
 
 * [Branches](#branches)
 * [Screenshots](#screenshots)
 * [Development](#development)
     * [Linting](#linting)
-    * [Unit testing](#unit-testing)
-    * [Travis CI](#travis)
 * [Contributors](#contributors)
 
 
@@ -18,25 +12,27 @@ Rhymes is a NativeScript-built Android app for children to learn some beautiful 
 
 This repository contains a branche:
 
-* The [**master** branch](https://github.com/Darahat/Rhymes.git) shows how to build a robust, real-world app using NativeScript. The branch is built with vue.js.
-This branch targets latest official release of {N}.
+* The [**master** branch](https://github.com/Darahat/nstack.git) shows how to build a Cross Browser Responsible,Simple & Beautifully Designed CRUDE Web Application.The branch is built with vue.js.
+This branch targets latest official release of Vue.js.
 
 
 
 <h2 id="screenshots">Screenshots</h2>
 
-![](rsz_screenshot_20180614-230221.png)
-![](rsz_screenshot_20180614-230228.png)
-![](rsz_screenshot_20180614-230243.png)
-![](rsz_screenshot_20180614-230302.png)
+![](Screenshot from 2018-06-27 14-58-57.png)
+![](screencapture-localhost-8080-2018-06-27-14_54_05.png)
+![](screencapture-localhost-8080-2018-06-27-14_55_11.png)
+![](screencapture-localhost-8080-2018-06-27-14_55_41.png)
+![](screencapture-localhost-8080-2018-06-27-14_57_14.png)
 
 
 <h2 id="development">Development</h2>
-This app is built with the NativeScript-Vue CLI. Once you have the CLI installed, start by cloning the repo:
+This app is built with the Vue CLI.Once you have the [CLI installed](https://vuejs.org/v2/guide/installation.html), start by cloning the repo:
 
+To install Vue ClI
 
 ```
-$ git clone https://github.com/Darahat/Rhymes.git
+$ git clone https://github.com/Darahat/nstack.git
 $ cd Rhymes
 ```
 
