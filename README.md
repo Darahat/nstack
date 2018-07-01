@@ -1,5 +1,5 @@
 # Nstack
-Nstack is a vuejs/node js CRUDE application for blogging.Its my first web application using Vuejs+Vuetify+NodeJS. 
+Nstack is a vuejs/node js CRUDE application for blogging.Its my first web application using Vuejs+Vuetify+NodeJS+Animate.css. 
 
 * [Branches](#branches)
 * [Screenshots](#screenshots)
@@ -17,13 +17,21 @@ This branch targets latest official release of Vue.js.
 
 
 <h2 id="screenshots">Screenshots</h2>
-###Post
+
+### Post
+
 ![](screencapture-localhost-8080-2018-06-27-14_54_05.png)
-###Index
+
+### Index
+
 ![](screencapture-localhost-8080-2018-06-27-14_55_11.png)
-###Login
+
+### Login
+
 ![](screencapture-localhost-8080-2018-06-27-14_55_41.png)
-###Register
+
+### Register
+
 ![](screencapture-localhost-8080-2018-06-27-14_57_14.png)
 
 
