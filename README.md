@@ -4,8 +4,7 @@ Nstack is a vuejs/node js CRUDE application for blogging.Its my first web applic
 * [Branches](#branches)
 * [Screenshots](#screenshots)
 * [Development](#development)
-    * [Linting](#linting)
-* [Contributors](#contributors)
+* [Contributor](#contributor)
 
 
 <h2 id="branches">Branches</h2>
@@ -18,10 +17,13 @@ This branch targets latest official release of Vue.js.
 
 
 <h2 id="screenshots">Screenshots</h2>
-
+###Post
 ![](screencapture-localhost-8080-2018-06-27-14_54_05.png)
+###Index
 ![](screencapture-localhost-8080-2018-06-27-14_55_11.png)
+###Login
 ![](screencapture-localhost-8080-2018-06-27-14_55_41.png)
+###Register
 ![](screencapture-localhost-8080-2018-06-27-14_57_14.png)
 
 
@@ -31,11 +33,12 @@ This app is built with the Vue CLI.Once you have the [CLI installed](https://vue
 
 ```
 $ git clone https://github.com/Darahat/nstack.git
-
+```
 
 Now you have to install ```npm``` on Client folder which will add dependencies according to ```package.json``` file.
 
 ### Client - Terminal A
+
 ```
 cd client
 npm install
@@ -45,6 +48,7 @@ npm run dev
 Now you have to install ```npm``` on Server folder which will add dependencies according to ```package.json``` file.
 
 ### Client - Terminal B
+
 ```
 cd client
 npm install
@@ -53,6 +57,8 @@ npm start
 From there you can see Nstack on your browser at http://localhost:8080/#/index
 
 For detailed instructions, see https://vuejs.org/v2/guide/
+
+<h2 id="contributor">Contributor</h2>
 
  Made With ❤️ By darahat
 
