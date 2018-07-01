@@ -62,12 +62,12 @@ cd server
 npm install
 npm start
 ```
-From there you can see Nstack on your browser at http://localhost:8080/#/index
 
-For detailed instructions About Vue.js, see https://vuejs.org/v2/guide/
-For detailed instructions About Vuetify, see https://vuetifyjs.com/en/getting-started/quick-start
-For detailed instructions About Node.js, see https://nodejs.org/en/docs/
-For detailed instructions About Animate.css, see https://daneden.github.io/animate.css/
+
+* For detailed instructions About Vue.js, see https://vuejs.org/v2/guide/
+* For detailed instructions About Vuetify, see https://vuetifyjs.com/en/getting-started/quick-start
+* For detailed instructions About Node.js, see https://nodejs.org/en/docs/
+* For detailed instructions About Animate.css, see https://daneden.github.io/animate.css/
 
 <h2 id="contributor">Contributor</h2>
 
