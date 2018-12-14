@@ -4,15 +4,17 @@
     <transition name="img-animation">
     <router-view/>
     </transition>
+
   </div>
 </template>
 
 <script>
 import panel from '@/components/global/panel'
+import bottomOptions from '@/components/global/bottomoptions'
 // import blank from '@/components/blank'
 export default {
   components: {
-    panel
+    panel, bottomOptions
   },
   name: 'App'
 }

@@ -1,5 +1,5 @@
 <template>
-<div style="max-width: 980px; margin: auto;" class="grey lighten-5">
+<div style="max-width: 980px; margin:10vh auto;" class="grey lighten-5">
   <v-layout row>
     <v-flex xs12>
       <v-card color="white darken-2">
@@ -16,14 +16,14 @@
                     <div class="red--text" v-html="error" />
                     <div class="t-field">
                       <v-flex xs12 sm6 style="margin: 10px;">
-                        <span style="color:gray;">Forgot password?</span>
+                        <!-- <span style="color:gray;">Forgot password?</span> -->
                       </v-flex>
                       <v-flex xs12 sm6>
                         <v-btn color="blue" name="animate" class="white--text" @click="register">Register</v-btn>
                       </v-flex>
                     </div>
                   </v-flex>
-                  <span style="color:gray;margin:40px">All ready have a Nstack account?</span>
+                  <span style="color:gray;margin:40px">All ready have a Nstack <router-link  to="/login">Account</router-link>?</span>
                 </v-layout>
               </v-card>
             </v-flex>

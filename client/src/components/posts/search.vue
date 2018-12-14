@@ -6,14 +6,14 @@
 <script>
 import _ from 'lodash'
 export default {
-  
+
   data () {
     return {
       search: ''
     }
   },
   watch: {
-    search: _.debounce(async function  (value) {
+    search: _.debounce(async function (value) {
       const route = {
         name: 'index'
       }
@@ -23,7 +23,7 @@ export default {
         }
       }
       this.$router.push(route)
-    },700),
+    }, 700),
     '$route.query.search': {
       immediate: true,
       async handler (value) {

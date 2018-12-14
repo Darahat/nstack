@@ -1,5 +1,5 @@
 <template>
-<div style="max-width: 980px; margin: auto;" class="grey lighten-5">
+<div style="max-width: 980px; margin:10vh auto;" class="grey lighten-5">
   <v-layout row>
     <v-flex xs12>
       <v-card color="white darken-2">
@@ -14,7 +14,7 @@
                     <v-text-field solo prepend-icon="lock"  v-model="password" class="animated fadeInLeft t-field" label="Password"></v-text-field>
                     <div class="t-field">
                       <v-flex xs12 sm12 >
-                        <span style="color:gray;">Forgot password?</span>
+                        <!-- <span style="color:gray;">Forgot password?</span> -->
                       </v-flex>
                       <v-flex xs12 sm12>
                         <div class="red--text" v-html="error"></div>
@@ -26,7 +26,7 @@
                     </div>
                   </v-flex>
                   <!-- <span style="color:gray;margin:50px">-  -  -  -  -  -  -  -   - or -  -   -  -  -  -  -  -  </span> -->
-                  <span style="color:gray;margin:40px">Create my Nstack account!</span>
+                  <span style="color:gray;margin:40px"><router-link  to="/register">Create</router-link>  my Nstack account!</span>
                 </v-layout>
               </div>
             </v-flex>

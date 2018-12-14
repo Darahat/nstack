@@ -26,7 +26,6 @@
   </v-card>
 </template>
 
-
 <script>
 import bookmarkService from '@/services/bookmarkService'
 import {

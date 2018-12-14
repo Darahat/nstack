@@ -145,7 +145,7 @@ export default {
         // console.log(this.post.id)
         // console.log(this.$store.state.user.id)
         const bookmarks = (await bookmarkService.post({
-          postId: this.post.id,
+          postId: this.post.id
           // userId: this.$store.state.user.id
         })).data
         this.bookmark = bookmarks
@@ -181,7 +181,7 @@ export default {
         // const postId = this.$store.state.route.params.postId
         // const userId = this.$store.state.route.params.userId
         const bookmarks = (await bookmarkService.index({
-          postId: this.post.id,
+          postId: this.post.id
           // userId: this.$store.state.user.id
         })).data
         if (bookmarks.length) {
