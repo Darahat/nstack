@@ -37,20 +37,8 @@ export default {
       userId: null
     }
   },
-  //   methods: {
-  // navigateTo (route) {
-  //   this.$router.push(route)
-  // },
-  // watch: {
-  //     '$route.query.search': {
-  //       immediate: true,
-  //       async handler (value) {
-  //         this.posts = (await postService.index(value)).data
-  //       }
-  //     }
-  //   },
-
-  // },
+  // get logged in user Id from store
+  // get userinfo accordint to this user Id
   async mounted () {
     this.userId = this.$store.state.route.params.userId
     this.user = (await userService.show(this.userId)).data

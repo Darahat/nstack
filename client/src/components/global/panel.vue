@@ -53,7 +53,7 @@
   <v-toolbar app fixed dense>
     <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
     <v-toolbar-items>
-      <router-link :to="('/index')" style="cursor: pointer;" class="title" tag="p">Nstack</router-link>
+      <router-link :to="('/')" style="cursor: pointer;" class="title" tag="p">Nstack</router-link>
     </v-toolbar-items>
     <v-spacer></v-spacer>
     <v-toolbar-items>
@@ -115,24 +115,18 @@ export default {
     drawer: false,
     user: {}
   }),
+  // mapState library keep session
   computed: {
     ...mapState([
       'isUserLoggedIn'
     ])
   },
-  //   watch: {
-  //   '$route.query.search': {
-  //     immediate: true,
-  //     async handler (value) {
-  //       this.posts = (await postService.index(value)).data
-  //     _.orderBy(this.posts, ['title', 'imgurl'], ['desc', 'asc'])
-  //     }
-  //   }
-  // },
   methods: {
+    // navigation trough route name
     navigateTo (route) {
       this.$router.push(route)
     },
+    // logout function remove logged in user info from store
     logout () {
       this.$store.dispatch('setToken', null)
       this.$store.dispatch('setUser', null)
@@ -145,13 +139,12 @@ export default {
   components: {
     linkPost
   },
+  // get logged in user Id from store
+  // get userinfo accordint to this user Id
   async mounted () {
     try {
-      // console.log()
       const userId = this.$store.state.user.id
-      // console.log(userId)
       this.user = (await userService.show(userId)).data
-      // console.log(this.user)
     } catch (err) {
       console.log('No User Logged in')
     }

@@ -47,6 +47,8 @@
 import authenticationService from '@/services/authenticationService'
 export default {
   methods: {
+    // send email and password info to database
+    // after that from payload  token and user information store to local store
     async login () {
       try {
         const response = await authenticationService.login({

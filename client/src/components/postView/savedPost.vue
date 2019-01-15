@@ -49,27 +49,21 @@ export default {
     }
   },
   computed: {
+    // mapState library keep session
     ...mapState([
       'isUserLoggedIn',
       'user'
     ])
   },
+  // check user logged in
+  // get bookmarked post's info
   async mounted () {
     if (this.isUserLoggedIn) {
       this.bookmarks = (await bookmarkService.index()).data
     }
-    try {
-      // this.postId = this.$store.state.route.params.postId
-      // this.userId = this.$store.state.user.id
-      // console.log(this.postId)
-      // console.log(this.userId)
-      // this.post = (await postService.show(postId)).data
-      //  this.user = (await userService.show(userId)).data
-    } catch (err) {
-      console.log(err)
-    }
   },
   methods: {
+  // navigation trough route name
     navigateTo (route) {
       this.$router.push(route)
     }

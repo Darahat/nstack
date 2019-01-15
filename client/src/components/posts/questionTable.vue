@@ -60,6 +60,8 @@ export default {
     blank,
     search
   },
+  // get route query search value and send it to database and check any information exist or not
+  // handle db attribute and check evry value of these attribute  from database
   watch: {
     '$route.query.search': {
       immediate: true,
@@ -70,6 +72,7 @@ export default {
     }
   },
   methods: {
+    // navigation trough route name
     navigateTo (route) {
       this.$router.push(route)
     }

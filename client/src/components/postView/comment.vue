@@ -43,6 +43,7 @@ import {
 } from 'vuex'
 
 export default {
+  // get post and user props value from post.vue
   props: [
     'post', 'user'
   ],
@@ -62,10 +63,10 @@ export default {
       error: null
     }
   },
+  // mount user comment info from database
   async mounted () {
     try {
       this.comments = (await commentService.index({
-        // userId: this.user.id,
         postId: this.$store.state.route.params.postId
       })).data
       console.log(this.comments.createdAt)
@@ -75,11 +76,15 @@ export default {
     }
   },
   computed: {
+    // mapState library keep session
     ...mapState([
       'isUserLoggedIn'
     ])
   },
   methods: {
+    // push comment value and user info to db and local vuex store
+    // get cmnt value and user information from store and set to comment variable
+    // push null value postcomment modal.
     async createComment () {
       this.commentdata.userId = this.$store.state.user.id
       this.commentdata.postId = this.$store.state.route.params.postId

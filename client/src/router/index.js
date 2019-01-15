@@ -6,11 +6,12 @@ import index from '@/components/posts/activeView'
 import post from '@/components/postView/post'
 import savedPost from '@/components/postView/savedPost'
 import user from '@/components/userProfile'
-
+import NProgress from 'nprogress'
 // import addpost from '@/components/addPost'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/register',
@@ -33,7 +34,7 @@ export default new Router({
       component: user
     },
     {
-      path: '/index',
+      path: '/',
       name: 'index',
       component: index
     },
@@ -49,3 +50,19 @@ export default new Router({
     // }
   ]
 })
+
+router.beforeResolve((to, from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+    // Start the route progress bar.
+    NProgress.start()
+  }
+  next()
+})
+
+router.afterEach((to, from) => {
+  // Complete the animation of the route progress bar.
+  NProgress.done()
+})
+
+export default router

@@ -48,11 +48,6 @@
                 </p>
                 <v-spacer></v-spacer>
                 <div style="text-align:right" >
-                  <!-- @click="navigateTo({
-                name: 'user',
-                params: {
-                  userId: post.userId
-                }})" -->
                   <span class="pb-2 body-2">{{user.username}}</span>
                   <v-avatar class="green" size="20px">
                     <i dark class="fa fa-user"></i>
